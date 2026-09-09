@@ -1,3 +1,8 @@
+/**
+ * hook 原型对象的所有属性和方法
+ * 不可配置的属性无法hook
+ * 本质是修改属性描述符
+ */
 // 实现函数native化
 // 自执行函数 内部的局部变量不会污染全局，是隔离沙箱
 ld = {};
@@ -38,25 +43,25 @@ ld = {};
     };
 
     // 新增 unhook函数，还原被native化的函数
-    globalThis.unhookFunctionToString = function(){
+    globalThis.unhookFunctionToString = function () {
         delete Function.prototype.toString;
-        Object.defineProperty(Function.prototype, "toString",{
-            enumerable:false,
-            configurable:true,
-            writable:true,
-            value:$toString
+        Object.defineProperty(Function.prototype, "toString", {
+            enumerable: false,
+            configurable: true,
+            writable: true,
+            value: $toString
         });
-       console.log("unhook done");
+        console.log("unhook done");
     }
 }();
 
 // 函数重命名
-ld.reNameFunc = function reNameFunc(func,name){
-    Object.defineProperty(func,"name",{
-        configurable:true,
-        enumerable:false,
-        writable:false,
-        value:name
+ld.reNameFunc = function reNameFunc(func, name) {
+    Object.defineProperty(func, "name", {
+        configurable: true,
+        enumerable: false,
+        writable: false,
+        value: name
     });
 };
 
@@ -136,37 +141,96 @@ ld.hook = function (func, funcInfo, isDegug, onEnter, onLeave, isExecute) {
         return argObj.result;
     }
     // hook后的函数，进行native化
-    ld.setNative(hookFunc,funcInfo.funcName);
-    ld.reNameFunc(hookFunc,funcInfo.funcName);
+    ld.setNative(hookFunc, funcInfo.funcName);
+    ld.reNameFunc(hookFunc, funcInfo.funcName);
     return hookFunc;
 }
 
-function add(a, b) {
-    console.log("正在执行原函数add方法");
-    return a + b;
+
+/**
+ * hook 对象的属性，本质是替换属性描述符
+ * @param obj 需要hook的对象
+ * @param objName hook对象的名字
+ * @param propName hook对象的属性名
+ * @param isDebug 布尔 是否开启调试
+ */
+ld.hookObj = function hookObj(obj, objName, propName, isDebug) {
+    let oldDescriptor = Object.getOwnPropertyDescriptor(obj, propName);
+    let newDescriptor = {};
+    // 若原来的属性不可配置，则无法hook，直接返回
+    if (!oldDescriptor.configurable) {
+        console.log(`属性无法hook，name:${oldDescriptor.name}, configurable为false`);
+        return;
+    }
+
+    // 必须有的属性
+    newDescriptor.configurable = true;
+    newDescriptor.enumerable = oldDescriptor.enumerable;
+
+    // 原有属性若是有writable属性，就设置
+    if (oldDescriptor.hasOwnProperty("writable")) {
+        newDescriptor.writable = oldDescriptor.writable;
+    }
+    if (oldDescriptor.hasOwnProperty("value")) {
+        let val = oldDescriptor.value;
+        // 判断value属性是不是函数
+        // 若不是函数，就不需要修改或者hook
+        if (typeof val !== 'function') {
+            return;
+        }
+        let funcInfo = {
+            objName: "objName",
+            funcName: propName,
+        }
+        newDescriptor.value = ld.hook(val, funcInfo, isDebug);
+    }
+    // 有的属性没有value属性，但有get和set
+    if (oldDescriptor.hasOwnProperty("get")) {
+        let get = oldDescriptor.get;
+        let funcInfo = {
+            objName: "objName",
+            funcName: `get ${propName}`, // 这里要加一个get 补完整的函数名
+        };
+        // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.name 输出的是 get cookie
+        // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.toString(); 输出的是 function get cookie() { [native code] }
+        // 因此 这里定义函数名称的时候要get  下面的set也是一样
+
+        newDescriptor.get = ld.hook(get, funcInfo, isDebug);
+    }
+    if (oldDescriptor.hasOwnProperty("set")) {
+        let set = oldDescriptor.set;
+        let funcInfo = {
+            objName: "objName",
+            funcName: `set ${propName}`, // 这里要加一个set 补完整的函数名
+        };
+
+        newDescriptor.set = ld.hook(set, funcInfo, isDebug);
+    }
+    // 到这里就可以真正hook这个属性了
+    Object.defineProperty(obj, propName, newDescriptor);
+
 }
 
-let funcInfo = {
-    objName: "Obj",
-    funcName: "add",
-};
-let onEnter = function (argObj) {
-    console.log("正在执行onEnter", argObj.args);
-    argObj.args[0] = 15;
-};
+// 使用方法
+// ld.hookObj(Document.prototype, "Document.prototype", "cookie");
+// document.cookie = "a=111";
 
-let onLeave = function (argObj) {
-    console.log("正在执行onLeave", argObj.result);
-    argObj.result = 16;
+/**
+ * hook 原型对象的所有属性
+ * @param proto 函数原型(不是原型对象)  原型是函数名称 是类，原型对象是函数名.prototype
+ * @param isDebug 是否调试
+ *
+ */
+ld.hookProto = function hookProto(proto, isDebug) {
+    let protoObj = proto.prototype;
+    let name = proto.name;
+    let descriptors = Object.getOwnPropertyDescriptors(protoObj);
+    for (const prop in descriptors) {
+        ld.hookObj(protoObj, `${name}.prototype`, prop, isDebug);
+    }
+    console.log(`hook ${name}.prototype`);
 }
 
-add = ld.hook(add, funcInfo, true, onEnter, onLeave, true);
-console.log(add(2, 3));
-console.log(add.toString());
-console.log(Function.prototype.toString.call(add));
-console.log(add.name);
-
-/*
-add = function (a, b) {
-    return a * b;
-}*/
+// 使用方法
+// ld.hookProto(Document);
+// document.cookie = "a=111";
