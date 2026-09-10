@@ -1,16 +1,16 @@
 // 初始化对象时定义属性
 
-let User = {name:"小明"};
-User.age = 18;
+let user = {name:"小明"};
+user.age = 18;
 
-//或 User["age"] = 18 // 形式不同而已
+//或 user["age"] = 18 // 形式不同而已
 
 /*
 * 第一个参数是对象
 * 第二个参数是属性名
 * 第三个参数是描述符(也是一个对象)
 * */
-Object.defineProperty(User,"height",{
+Object.defineProperty(user,"height",{
     enumerable:true, // 是否可以遍历
     configurable:true, // 是否可配置(能不能重新定义这个属性)
     value:170,
@@ -18,20 +18,20 @@ Object.defineProperty(User,"height",{
 
 });
 
-for (const userKey in User) {
+for (const userKey in user) {
     console.log(userKey); // name age height
 }
-User.height =180; // 若writable为false 则这个设置会失效
-console.log(User.height);
+user.height =180; // 若writable为false 则这个设置会失效
+console.log(user.height);
 
 /*
-Object.defineProperty(User,"height",{
+Object.defineProperty(user,"height",{
     enumerable:true,
     configurable:true, // 若上面定义为false 这里会报错  Cannot redefine property: height
 });
 */
 let temp = 130;
-Object.defineProperty(User,"weight",{
+Object.defineProperty(user,"weight",{
     enumerable:true,
     configurable:true,
     get:function (){
@@ -51,6 +51,6 @@ Object.defineProperty(User,"weight",{
 
 });
 
-console.log(User.weight);
-User.weight =62;
-console.log(User.weight);
+console.log(user.weight);
+user.weight =62;
+console.log(user.weight);

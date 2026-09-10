@@ -36,18 +36,18 @@ console.log(user); // User {}
 
 user.login("xi","s");
 
-// 从原型对象到原型
+// 从原型对象到原型 constructor
 console.log(User.prototype.constructor === User); // true
 
-// 从原型对象到实例对象
+// 从原型对象到实例对象 constructor
 let user2 = new User.prototype.constructor();
 console.log(user2); // User {}
 
-// 从实例对象到原型对象
+// 从实例对象到原型对象__proto__   getPrototypeOf
 console.log(user.__proto__ === User.prototype); // true
 console.log(Object.getPrototypeOf(user) === User.prototype); // true
 
-// 从实例对象到原型
+// 从实例对象到原型 constructor
 console.log(user.__proto__.constructor===User); // true
 console.log(Object.getPrototypeOf(user).constructor === User); // true
 
