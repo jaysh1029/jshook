@@ -3,9 +3,12 @@
  * 不可配置的属性无法hook
  * 本质是修改属性描述符
  */
+
+// 定义全局对象 所有hook方法都放到这个对象里
+let ld = {};
+
 // 实现函数native化
 // 自执行函数 内部的局部变量不会污染全局，是隔离沙箱
-ld = {};
 !function () {
     // 保存原始原型函数toString
     const $toString = Function.prototype.toString;
@@ -51,7 +54,7 @@ ld = {};
             writable: true,
             value: $toString
         });
-        console.log("unhook done");
+        // console.log("unhook done");
     }
 }();
 
@@ -107,11 +110,11 @@ ld.hook = function hook(func, funcInfo, isDegug, onEnter, onLeave, isExecute) {
             console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,返回值是${JSON.stringify(argObj.result)}}`);
         };
     }
-    if (isExecute == undefined) {
+    if (isExecute === undefined) {
         isExecute = true;
     }
 
-    // 替换函数，然后返回
+    // 用这个函数替换原函数(原函数 = hook后的函数)
     let hookFunc = function () {
 
         if (isDegug) {
@@ -174,7 +177,7 @@ ld.hookObj = function hookObj(obj, objName, propName, isDebug) {
     if (oldDescriptor.hasOwnProperty("value")) {
         let val = oldDescriptor.value;
         // 判断value属性是不是函数
-        // 若不是函数，就不需要修改或者hook
+        // 若不是函数，就不需要修改或者hook 因为value是直接获取或设置了，不需要get，set
         if (typeof val !== 'function') {
             return;
         }
@@ -217,7 +220,7 @@ ld.hookObj = function hookObj(obj, objName, propName, isDebug) {
 
 /**
  * hook 原型对象的所有属性
- * @param proto 函数原型(不是原型对象)  原型是函数名称 是类，原型对象是函数名.prototype
+ * @param proto 函数原型(不是原型对象)  原型是函数名称 是类，原型对象是 (函数名.prototype)
  * @param isDebug 是否调试
  *
  */
