@@ -208,6 +208,7 @@ delete Buffer; // 检测Node环境
 //window.webdriver = false;
 
 document = {};
+document.cookie = "";
 // 补完window对象如果还报错，那就开始代理这个刚补过的对象
 window = ld.proxy(window, "window");
 // 补完document对象如果还报错，那就开始代理这个刚补过的对象
