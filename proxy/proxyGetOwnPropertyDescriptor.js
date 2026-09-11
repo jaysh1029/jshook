@@ -73,15 +73,27 @@ ld.proxy = function proxy(obj, objName) {
                 let type = ld.getType(result);
                 console.log(`{getOwnPropertyDescriptor | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
 
-                if (typeof result !== "undefined") { // 对象没有这个属性
-                    result = ld.proxy(result, `${objName}.${prop.toString()}.PropertyDescriptor`);
-                }
+                // 一般不需要拦截属性描述符，在需要的时候再拦截
+                // if (typeof result !== "undefined") { // 对象没有这个属性
+                //     result = ld.proxy(result, `${objName}.${prop.toString()}.PropertyDescriptor`);
+                // }
             } catch (e) {
                 console.log(`{getOwnPropertyDescriptor error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
             }
 
             return result;
-        }
+        },
+        defineProperty(target, prop, descriptor) {
+            let result;
+            try {
+                result = Reflect.defineProperty(target, prop, descriptor);
+                let type = ld.getType(result);
+                console.log(`{defineProperty | obj:[${objName}] -> prop:[${prop.toString()}]}`);
+            } catch (e) {
+                console.log(`{defineProperty error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
+            }
+            return result;
+        },
     };
     return new Proxy(obj, handler);
 }
@@ -102,4 +114,4 @@ let user = {
 user = ld.proxy(user, "user");
 
 console.log(Object.getOwnPropertyDescriptor(user, "name"));
-console.log(Object.getOwnPropertyDescriptor(user, "age"));
+user.hobby = "游泳";
