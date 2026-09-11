@@ -82,7 +82,18 @@ ld.proxy = function proxy(obj, objName) {
             }
 
             return result;
-        }
+        },
+        defineProperty(target, prop, descriptor) {
+            let result;
+            try {
+                result = Reflect.defineProperty(target, prop, descriptor);
+                let type = ld.getType(result);
+                console.log(`{defineProperty | obj:[${objName}] -> prop:[${prop.toString()}]}`);
+            } catch (e) {
+                console.log(`{defineProperty error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
+            }
+            return result;
+        },
     };
     return new Proxy(obj, handler);
 }
