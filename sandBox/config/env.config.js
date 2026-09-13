@@ -24,6 +24,8 @@ function getFile(fileName) {
 
 function getCode() {
     let code = "// env相关代码\r\n";
+    code += getFile("eventTarget");
+    code += getFile("windowProperties"); // 因为window继承自WindowProperties，所以要先定义WindowProperties
     code += getFile("window");
     return code;
 }

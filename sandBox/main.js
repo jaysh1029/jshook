@@ -17,6 +17,8 @@ const siteName = "siteName";
 // 创建虚拟机
 const vm = new VM();
 
+// 全局对象配置
+const configCode = fs.readFileSync("./config/config.js");
 
 // 功能插件相关函数
 const toolsCode = tools.getCode();
@@ -41,7 +43,7 @@ const asyncCode = user.getCode(siteName, "async");
 
 // 整合代码
 
-const code = `${toolsCode}${envCode}${globalVarCode}${userVarCode}${proxyCode}${debugCode}${asyncCode}`;
+const code = `${configCode}${toolsCode}${envCode}${globalVarCode}${userVarCode}${proxyCode}${debugCode}${asyncCode}`;
 
 
 // 创建脚本
