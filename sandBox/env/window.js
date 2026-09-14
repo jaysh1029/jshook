@@ -15,6 +15,7 @@
 
 
 Window = function Window() {
+    ldvm.toolsFunc.throwError("TypeError", "Illegal constructor");
 };
 //window = globalThis;
 // let window2 = {};
@@ -40,9 +41,31 @@ ldvm.toolsFunc.reNameObj(Window, "Window");
 // 设置Window.prototype的原型对象
 Object.setPrototypeOf(Window.prototype, WindowProperties.prototype);
 
-
-let window = {};
+// 删除浏览器中不存在的对象，这些可能会被检测到，如果有其他对象，继续删除即可
+delete global;
+delete Buffer;
+let window = globalThis;
 Object.setPrototypeOf(window, Window.prototype);
+
+// 在这里定义window的对象
+
+// atob  btoa 方法 在纯净的V8环境中是没有定义的，需要补环境
+// 定义atob方法 解码base64字符串为普通字符串
+Object.defineProperty(window,"atob",{
+    value:function atob(base64String){
+        return ldvm.toolsFunc.base64.base64Decode(base64String);
+    }
+});
+ldvm.toolsFunc.setNative(window.atob,"atob"); // native化 atob方法
+
+// 定义btoa方法 编码普通字符串为base64字符串
+Object.defineProperty(window,"btoa",{
+    value:function btoa(normalString){
+        return ldvm.toolsFunc.base64.base64Encode(normalString);
+    }
+});
+ldvm.toolsFunc.setNative(window.btoa,"btoa"); // native化 btoa方法
+
 console.log(window, window.toString()); //Window {} [object Window] 这样原型链就跟浏览器中的window一致了
 
 // 这里跟浏览器还不一样，所以需要进行函数native化
@@ -51,6 +74,35 @@ ldvm.toolsFunc.setNative(Window);
 console.log(window.toString()); // [object Window]
 console.log(Window.toString()); //function Window() { [native code] }
 console.log(window.__proto__.toString()); // [object Window]
+
+// 这段代码要注释，否则在main.js中会报错，因为在vm.run中 遇到这里会抛出异常
+//console.log(new Window()); // Window {} 这个在浏览器中是不能new的，会报错：Uncaught TypeError: Failed to construct 'Window': Illegal constructor 这也是一个检测点
+/*
+* 若要补这个new Window()报错的环境 需要知道报错类型，在浏览器的控制台中利用try catch捕获报错类型
+*
+* try{
+    new Window();
+}catch(e){
+    debugger; // 这里也可以断点调试，看实际类型
+    console.log(e.__proto__);
+}
+输出的是以下类型
+* Error {name: 'TypeError', message: ''}
+constructor:TypeError()
+message:""
+name:"TypeError"
+[[Prototype]]:Object
+*
+* 那就需要补TypeError这个类型的环境
+* 在Window函数中 加入
+* ldvm.toolsFunc.throwError("TypeError", "Illegal constructor");即可
+*
+* */
+
+
+console.log(atob("YWJj"));
+console.log(btoa("abc"));
+console.log(atob.toString(),btoa.toString());
 
 
 

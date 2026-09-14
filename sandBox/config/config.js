@@ -1,5 +1,5 @@
 // 全局对象配置
-debugger;
+//debugger;
 let ldvm = {
     // 功能函数相关
     toolsFunc: {}

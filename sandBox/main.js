@@ -14,9 +14,6 @@ const env = require("./config/env.config");
 
 // 网站名称
 const siteName = "siteName";
-// 创建虚拟机
-const vm = new VM();
-
 // 全局对象配置
 const configCode = fs.readFileSync("./config/config.js");
 
@@ -45,21 +42,27 @@ const asyncCode = user.getCode(siteName, "async");
 
 const code = `${configCode}${toolsCode}${envCode}${globalVarCode}${userVarCode}${proxyCode}${debugCode}${asyncCode}`;
 
+// 创建虚拟机
+const vm = new VM();
 
 // 创建脚本
 const script = new VMScript(code, "./debugJS.js");
 
-// 运行脚本
-// 如果调试的时候在这里下断点，但new VMScript(code)中要加入要调试代码的路径
-const result = vm.run(script);
 
-// 输出结果
-console.log(result);
+try {
+
+    // 运行脚本
+    // 如果调试的时候在这里下断点，但new VMScript(code)中要加入要调试代码的路径
+    const result = vm.run(script);
+    console.log("执行结果:", result);
+} catch (err) {
+    console.error("脚本执行出错:", err.message);
+    console.error(err.stack);
+}
 
 // 输出文件
 fs.writeFileSync(`./user/${siteName}/output.js`, code);
 console.log("执行完成");
-
 
 
 
