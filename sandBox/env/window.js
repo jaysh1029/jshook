@@ -36,44 +36,23 @@ Object.defineProperty(Window.prototype, Symbol.toStringTag, {
     writable: false,
 });*/
 
-ldvm.toolsFunc.reNameObj(Window, "Window");
+//ldvm.toolsFunc.reNameObj(Window, "Window");
+// 换成safeProto方法 同时调用reNameObj和setNative方法
+ldvm.toolsFunc.safeProto(Window, "Window");
+
 
 // 设置Window.prototype的原型对象
 Object.setPrototypeOf(Window.prototype, WindowProperties.prototype);
 
-// 删除浏览器中不存在的对象，这些可能会被检测到，如果有其他对象，继续删除即可
-delete global;
-delete Buffer;
-let window = globalThis;
-Object.setPrototypeOf(window, Window.prototype);
 
-// 在这里定义window的对象
-
-// atob  btoa 方法 在纯净的V8环境中是没有定义的，需要补环境
-// 定义atob方法 解码base64字符串为普通字符串
-Object.defineProperty(window,"atob",{
-    value:function atob(base64String){
-        return ldvm.toolsFunc.base64.base64Decode(base64String);
-    }
-});
-ldvm.toolsFunc.setNative(window.atob,"atob"); // native化 atob方法
-
-// 定义btoa方法 编码普通字符串为base64字符串
-Object.defineProperty(window,"btoa",{
-    value:function btoa(normalString){
-        return ldvm.toolsFunc.base64.base64Encode(normalString);
-    }
-});
-ldvm.toolsFunc.setNative(window.btoa,"btoa"); // native化 btoa方法
-
-console.log(window, window.toString()); //Window {} [object Window] 这样原型链就跟浏览器中的window一致了
+//console.log(window, window.toString()); //Window {} [object Window] 这样原型链就跟浏览器中的window一致了
 
 // 这里跟浏览器还不一样，所以需要进行函数native化
-console.log(Window.toString()); //function Window() {}
-ldvm.toolsFunc.setNative(Window);
-console.log(window.toString()); // [object Window]
-console.log(Window.toString()); //function Window() { [native code] }
-console.log(window.__proto__.toString()); // [object Window]
+//console.log(Window.toString()); //function Window() {}
+//ldvm.toolsFunc.setNative(Window,"Window");
+// console.log(window.toString()); // [object Window]
+// console.log(Window.toString()); //function Window() { [native code] }
+// console.log(window.__proto__.toString()); // [object Window]
 
 // 这段代码要注释，否则在main.js中会报错，因为在vm.run中 遇到这里会抛出异常
 //console.log(new Window()); // Window {} 这个在浏览器中是不能new的，会报错：Uncaught TypeError: Failed to construct 'Window': Illegal constructor 这也是一个检测点
@@ -100,11 +79,48 @@ name:"TypeError"
 * */
 
 
-console.log(atob("YWJj"));
-console.log(btoa("abc"));
-console.log(atob.toString(),btoa.toString());
+// console.log(atob("YWJj"));
+// console.log(btoa("abc"));
+// console.log(atob.toString(),btoa.toString());
 
 
+// 补环境  Window原型的属性 在浏览器中可以通过 Object.getOwnPropertyDescriptors(Window) 来获取原型属性，然后对比着补环境
+Object.defineProperty(Window,"PERSISTENT",{
+    configurable:false,
+    enumerable:true,
+    value:1,
+    writable:false
+});
+
+Object.defineProperty(Window,"TEMPORARY",{
+    configurable:false,
+    enumerable:true,
+    value:0,
+    writable:false
+});
+
+// 环境补完之后，可以在浏览器通过 dir(Window) 查看Window原型的属性值
+
+
+// 补环境  Window.prototype原型对象的属性
+/*
+* 在浏览器中可以通过 Object.getOwnPropertyDescriptors(Window.prototype) 来获取原型属性，然后对比着补环境
+* Symbol.toStringTag 不需要补了，已经在ldvm.toolsFunc.reNameObj中补了
+* */
+
+Object.defineProperty(Window.prototype,"PERSISTENT",{
+    configurable:false,
+    enumerable:true,
+    value:1,
+    writable:false
+});
+
+Object.defineProperty(Window.prototype,"TEMPORARY",{
+    configurable:false,
+    enumerable:true,
+    value:0,
+    writable:false
+});
 
 
 

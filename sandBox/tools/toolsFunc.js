@@ -66,6 +66,34 @@
         });
     };
 
+    // 函数重命名
+    ldvm.toolsFunc.reNameFunc = function reNameFunc(func, name) {
+        Object.defineProperty(func, "name", {
+            configurable: true,
+            enumerable: false,
+            writable: false,
+            value: name
+        });
+    };
+    /**
+     * 函数保护方法 就是把setNative 和 reNameFunc 合并起来，方便调用
+     * @param func 函数对象
+     * @param funcName 函数名
+     */
+    ldvm.toolsFunc.safeFunc = function safeFunc(func, funcName) {
+        ldvm.toolsFunc.setNative(func, funcName);
+        ldvm.toolsFunc.reNameFunc(func, funcName);
+    };
+    /**
+     * 对象保护方法 就是把setNative 和 reNameObj 合并起来，方便调用
+     * @param obj 对象对象
+     * @param name 对象名
+     */
+    ldvm.toolsFunc.safeProto = function safeProto(obj, name) {
+        ldvm.toolsFunc.setNative(obj, name);
+        ldvm.toolsFunc.reNameObj(obj, name);
+    };
+
     // 抛错函数
     ldvm.toolsFunc.throwError = function throwError(name, message) {
 
@@ -78,7 +106,7 @@
 
     // base64 编码和解码 以及与Hex互转函数
     !function () {
-        ldvm.toolsFunc.base64={};
+        ldvm.toolsFunc.base64 = {};
         let base64EncodeChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
             base64DecodeChars = new Array((-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), 62, (-1), (-1), (-1), 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, (-1), (-1), (-1), (-1), (-1), (-1), (-1), 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, (-1), (-1), (-1), (-1), (-1), (-1), 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, (-1), (-1), (-1), (-1), (-1));
         ldvm.toolsFunc.base64.base64Encode = function base64Encode(e) {
