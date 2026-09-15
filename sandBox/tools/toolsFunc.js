@@ -3,6 +3,41 @@
 // 自执行函数 内部的局部变量不会污染全局，是隔离沙箱
 !function () {
 
+    // 定义对象属性 defineProperty
+    ldvm.toolsFunc.defineProperty = function defineProperty(obj, prop, oldDescriptor)
+    {
+        let newDescriptor = {};
+        // 这个属性如果需要代理，则必须为true
+        newDescriptor.configurable = ldvm.config.proxy || oldDescriptor.configurable;
+        newDescriptor.enumerable = oldDescriptor.enumerable;
+        if (oldDescriptor.hasOwnProperty("writable")) {
+            newDescriptor.writable = ldvm.config.proxy || oldDescriptor.writable;
+        }
+        if (oldDescriptor.hasOwnProperty("value")) {
+            let val = oldDescriptor.value;
+            if (typeof val === "function") {
+                ldvm.toolsFunc.safeFunc(val, prop);
+            }
+            newDescriptor.value = val;
+        }
+
+        if (oldDescriptor.hasOwnProperty("get")) {
+            let get = oldDescriptor.get;
+            if (typeof get === "function") {
+                ldvm.toolsFunc.safeFunc(get, `get ${prop}`);
+            }
+            newDescriptor.get = get;
+
+        }
+        if (oldDescriptor.hasOwnProperty("set")) {
+            let set = oldDescriptor.set;
+            if (typeof set === "function") {
+                ldvm.toolsFunc.safeFunc(set, `set ${prop}`);
+            }
+            newDescriptor.set = set;
+        }
+        Object.defineProperty(obj,prop,newDescriptor);
+    }
 
     // 函数native化
     !function () {

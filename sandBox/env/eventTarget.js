@@ -12,13 +12,19 @@ ldvm.toolsFunc.safeProto(EventTarget, "EventTarget");
 
 
 // 补EventTarget的addEventListener方法
-Object.defineProperty(EventTarget.prototype, "addEventListener", {
+// Object.defineProperty(EventTarget.prototype, "addEventListener", {
+//     value: function () {
+//     },
+// })
+
+// 对value进行保护，防止被检测到
+//ldvm.toolsFunc.safeFunc(Object.getOwnPropertyDescriptor(EventTarget.prototype, "addEventListener").value, "addEventListener");
+
+// 上面的代码换成下面封装好的代码
+ldvm.toolsFunc.defineProperty(EventTarget.prototype, "addEventListener", {
     value: function () {
     },
-})
-// 对value进行保护，防止被检测到
-ldvm.toolsFunc.safeFunc(Object.getOwnPropertyDescriptor(EventTarget.prototype, "addEventListener").value, "addEventListener");
-
+});
 
 
 

@@ -85,21 +85,37 @@ name:"TypeError"
 
 
 // 补环境  Window原型的属性 在浏览器中可以通过 Object.getOwnPropertyDescriptors(Window) 来获取原型属性，然后对比着补环境
-Object.defineProperty(Window,"PERSISTENT",{
+// Object.defineProperty(Window,"PERSISTENT",{
+//     configurable:false,
+//     enumerable:true,
+//     value:1,
+//     writable:false
+// });
+//
+// Object.defineProperty(Window,"TEMPORARY",{
+//     configurable:false,
+//     enumerable:true,
+//     value:0,
+//     writable:false
+// });
+
+// 环境补完之后，可以在浏览器通过 dir(Window) 查看Window原型的属性值
+
+// 上面的代码换成下面封装好的代码
+ldvm.toolsFunc.defineProperty(Window,"PERSISTENT",{
     configurable:false,
     enumerable:true,
     value:1,
     writable:false
 });
 
-Object.defineProperty(Window,"TEMPORARY",{
+ldvm.toolsFunc.defineProperty(Window,"TEMPORARY",{
     configurable:false,
     enumerable:true,
     value:0,
     writable:false
 });
 
-// 环境补完之后，可以在浏览器通过 dir(Window) 查看Window原型的属性值
 
 
 // 补环境  Window.prototype原型对象的属性
@@ -108,14 +124,30 @@ Object.defineProperty(Window,"TEMPORARY",{
 * Symbol.toStringTag 不需要补了，已经在ldvm.toolsFunc.reNameObj中补了
 * */
 
-Object.defineProperty(Window.prototype,"PERSISTENT",{
+// Object.defineProperty(Window.prototype,"PERSISTENT",{
+//     configurable:false,
+//     enumerable:true,
+//     value:1,
+//     writable:false
+// });
+//
+// Object.defineProperty(Window.prototype,"TEMPORARY",{
+//     configurable:false,
+//     enumerable:true,
+//     value:0,
+//     writable:false
+// });
+
+// 上面的代码换成下面封装好的代码
+
+ldvm.toolsFunc.defineProperty(Window.prototype,"PERSISTENT",{
     configurable:false,
     enumerable:true,
     value:1,
     writable:false
 });
 
-Object.defineProperty(Window.prototype,"TEMPORARY",{
+ldvm.toolsFunc.defineProperty(Window.prototype,"TEMPORARY",{
     configurable:false,
     enumerable:true,
     value:0,

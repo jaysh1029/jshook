@@ -2,5 +2,8 @@
 //debugger;
 let ldvm = {
     // 功能函数相关
-    toolsFunc: {}
+    toolsFunc: {},
+    config: {
+        proxy: false // 是否开启代理
+    },
 };
