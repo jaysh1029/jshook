@@ -12,5 +12,8 @@ ldvm.envFunc.EventTarget_addEventListener = function () {
     ldvm.envFunc.Storage_getItem = function () {
         return null;
     };
+    ldvm.envFunc.document_location_get = function () {
+        return location;
+    };
 }();
 
