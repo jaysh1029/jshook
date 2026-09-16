@@ -27,6 +27,11 @@ function getCode() {
     code += getFile("eventTarget");
     code += getFile("windowProperties"); // 因为window继承自WindowProperties，所以要先定义WindowProperties
     code += getFile("window");
+    code += getFile("node");
+    code += getFile("document");
+    code += getFile("htmlDocument");
+    code += getFile("storage");
+    code += getFile("navigator");
     code += getFile("globalThis"); // 全局环境放到最后
     return code;
 }

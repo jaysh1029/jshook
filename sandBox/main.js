@@ -5,7 +5,8 @@
 
 // VM 虚拟机
 // 代码通过VMScript创建
-const {VM, VMScript} = require("vm2");
+// const {VM, VMScript} = require("vm2"); // 在有Proxy的对象时，无法使用，暂时弃用
+const vm = require("vm");
 const fs = require("fs"); // 文件操作
 const user = require("./config/user.config");
 const tools = require("./config/tools.config");
@@ -42,18 +43,23 @@ const asyncCode = user.getCode(siteName, "async");
 
 const code = `${configCode}${toolsCode}${envCode}${globalVarCode}${userVarCode}${proxyCode}${debugCode}${asyncCode}`;
 
-// 创建虚拟机
-const vm = new VM();
-
-// 创建脚本
-const script = new VMScript(code, "./debugJS.js");
+// 弃用vm2，因为vm2在有Proxy的对象时，无法使用，暂时弃用
+// // 创建虚拟机
+// const vm = new VM();
+//
+// // 创建脚本
+// const script = new VMScript(code, "./debugJS.js");
 
 
 try {
 
     // 运行脚本
     // 如果调试的时候在这里下断点，但new VMScript(code)中要加入要调试代码的路径
-    const result = vm.run(script);
+    // const result = vm.run(script);
+    const context = vm.createContext({}); // 空 sandbox
+    const script = new vm.Script(code, {filename: "./debugJS.js"});
+    const result = script.runInContext(context, {timeout: 1000});
+
     console.log("执行结果:", result);
 } catch (err) {
     console.error("脚本执行出错:", err.message);

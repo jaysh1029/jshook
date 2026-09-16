@@ -16,7 +16,7 @@ Object.setPrototypeOf(WindowProperties.prototype, EventTarget.prototype);
 // WindowProperties对象在浏览器中是不存在的，所以在设置原型链之后，要删除这个对象
 delete WindowProperties.prototype;
 
-
+// 这个环境，其实无法从浏览器中直接拿过来，需要自己去实现
 
 
 

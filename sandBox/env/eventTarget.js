@@ -23,6 +23,8 @@ ldvm.toolsFunc.safeProto(EventTarget, "EventTarget");
 // 上面的代码换成下面封装好的代码
 ldvm.toolsFunc.defineProperty(EventTarget.prototype, "addEventListener", {
     value: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,EventTarget.prototype,"EventTarget","addEventListener",arguments);
     },
 });
 

@@ -15,8 +15,15 @@
 
 
 Window = function Window() {
-    ldvm.toolsFunc.throwError("TypeError", "Illegal constructor");
+   return  ldvm.toolsFunc.throwError("TypeError", "Failed to construct 'Window': Illegal constructor");
 };
+// Window对象
+Window = function Window() {
+ldvm.toolsFunc.throwError("TypeError", "Failed to construct 'Window': Illegal constructor");
+}
+//ldvm.toolsFunc.safeProto(Window, "Window");
+
+
 //window = globalThis;
 // let window2 = {};
 // Object.defineProperties(window2, Window.prototype);
@@ -154,7 +161,7 @@ ldvm.toolsFunc.defineProperty(Window.prototype,"TEMPORARY",{
     writable:false
 });
 
-
+// 这些环境，其实是可以在浏览器中直接拿过来的，不需要自己去实现
 
 
 

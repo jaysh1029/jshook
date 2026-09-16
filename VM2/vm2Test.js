@@ -1,4 +1,4 @@
-const { VM, VMScript } = require("vm2");
+const vm = require("vm");
 const fs = require("fs");
 
 const siteName = "mysite";       // 补上
@@ -12,15 +12,17 @@ let code = `function throwError(name, message) {
     error.stack = \`\${name}: \${message}\n    at <anonymous>:2:5\`;
     throw error;
 }
-//throwError(${JSON.stringify(errName)}, ${JSON.stringify(errMessage)});`;
+//throwError(${JSON.stringify(errName)}, ${JSON.stringify(errMessage)});
+var obj = {};
+let proxy = new Proxy(obj, {})
+`;
 
-const script = new VMScript(code, "./debugJS.js");
-const vm = new VM({ timeout: 1000, sandbox: {} });
+const context = vm.createContext({}); // 空 sandbox
+const script = new vm.Script(code, { filename: "./debugJS.js" });
 
 try {
-    const result = vm.run(script);
+    const result = script.runInContext(context, { timeout: 1000 });
     console.log(result);
-    //console.log(code);
 } catch (err) {
     console.error("脚本执行出错:", err.message);
     console.error(err.stack);
