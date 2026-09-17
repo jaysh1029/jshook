@@ -15,6 +15,10 @@ const env = require("./config/env.config");
 
 // 网站名称
 const siteName = "siteName";
+
+// 清空日志
+fs.writeFileSync(`./user/${siteName}/log.txt`, "");
+
 // 全局对象配置
 const configCode = fs.readFileSync("./config/config.js");
 
@@ -43,6 +47,9 @@ const asyncCode = user.getCode(siteName, "async");
 
 const code = `${configCode}${toolsCode}${envCode}${globalVarCode}${userVarCode}${proxyCode}${debugCode}${asyncCode}`;
 
+const logCode = fs.readFileSync("./tools/printLog.js");
+const codeTest = `${configCode}${toolsCode}${logCode}${envCode}${globalVarCode}${userVarCode}${proxyCode}${debugCode}${asyncCode}`;
+
 // 弃用vm2，因为vm2在有Proxy的对象时，无法使用，暂时弃用
 // // 创建虚拟机
 // const vm = new VM();
@@ -56,8 +63,12 @@ try {
     // 运行脚本
     // 如果调试的时候在这里下断点，但new VMScript(code)中要加入要调试代码的路径
     // const result = vm.run(script);
-    const context = vm.createContext({}); // 空 sandbox
-    const script = new vm.Script(code, {filename: "./debugJS.js"});
+    const context = vm.createContext({
+        fs:fs,
+        _siteName_: siteName,
+
+    }); // 空 sandbox
+    const script = new vm.Script(codeTest, {filename: "./debugJS.js"});
     const result = script.runInContext(context, {timeout: 1000});
 
     console.log("执行结果:", result);

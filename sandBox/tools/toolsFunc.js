@@ -398,6 +398,164 @@ ldvm.toolsFunc.proxy = function proxy(obj, objName) {
     return new Proxy(obj, handler);
 }
 
+/**
+ *
+ * @param func 原函数
+ * @param funcInfo 是一个对象，objName,funcName属性
+ * @param isDegug 布尔类型，是否进行调试，关键点定位，回溯调用栈
+ * @param onEnter 函数，原函数执行前执行的函数，修改原函数入参，或者输出入参
+ * @param onLeave 函数， 原函数执行完之后执行的函数，改原函数的返回值，或者输出原函数的返回值
+ * @param isExecute 布尔类型，是否执行原函数，比如：过掉无限debugger函数
+ */
+ldvm.toolsFunc.hook = function hook(func, funcInfo, isDegug, onEnter, onLeave, isExecute) {
+    // 默认参数处理
+    if (typeof func !== 'function') {
+        return func;
+    }
+    if (funcInfo === undefined) {
+        funcInfo = {};
+        funcInfo.objName = "globalThis";
+        funcInfo.funcName = func.name || "";
+    }
+    //console.log(isDegug);
+    if (isDegug === undefined) {
+        isDegug = false;
+    }
+
+    if (onEnter === undefined) {
+        onEnter = function (argObj) {
+            console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,参数是${JSON.stringify(argObj.args)}}`);
+        };
+    }
+    if (onLeave === undefined) {
+        onLeave = function (argObj) {
+            console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,返回值是${JSON.stringify(argObj.result)}}`);
+        };
+    }
+    if (isExecute === undefined) {
+        isExecute = true;
+    }
+
+    // 用这个函数替换原函数(原函数 = hook后的函数)
+    let hookFunc = function () {
+
+        if (isDegug) {
+            debugger;
+        }
+        let argObj = {};
+        argObj.args = [];
+        for (let i = 0; i < arguments.length; i++) {
+            argObj.args[i] =arguments[i];
+            // argObj.args.push(arguments[i]); 这里不能用push 有数组大小上限
+        }
+
+        // 原函数执行前
+        onEnter.call(this, argObj);
+
+        // 原函数正在执行
+        let result;
+        if (isExecute) {
+            result = func.apply(this, argObj.args);
+        }
+
+        argObj.result = result;
+
+        // 原函数执行后
+        onLeave.call(this, argObj);
+
+        return argObj.result;
+    }
+    // hook后的函数，进行native化
+    ldvm.toolsFunc.setNative(hookFunc, funcInfo.funcName);
+    ldvm.toolsFunc.reNameFunc(hookFunc, funcInfo.funcName);
+    return hookFunc;
+}
+
+
+/**
+ * hook 对象的属性，本质是替换属性描述符
+ * @param obj 需要hook的对象
+ * @param objName hook对象的名字
+ * @param propName hook对象的属性名
+ * @param isDebug 布尔 是否开启调试
+ */
+ldvm.toolsFunc.hookObj = function hookObj(obj, objName, propName, isDebug) {
+    let oldDescriptor = Object.getOwnPropertyDescriptor(obj, propName);
+    let newDescriptor = {};
+    // 若原来的属性不可配置，则无法hook，直接返回
+    if (!oldDescriptor.configurable) {
+        console.log(`属性无法hook，name:${oldDescriptor.name}, configurable为false`);
+        return;
+    }
+
+    // 必须有的属性
+    newDescriptor.configurable = true;
+    newDescriptor.enumerable = oldDescriptor.enumerable;
+
+    // 原有属性若是有writable属性，就设置
+    if (oldDescriptor.hasOwnProperty("writable")) {
+        newDescriptor.writable = oldDescriptor.writable;
+    }
+    if (oldDescriptor.hasOwnProperty("value")) {
+        let val = oldDescriptor.value;
+        // 判断value属性是不是函数
+        // 若不是函数，就不需要修改或者hook 因为value是直接获取或设置了，不需要get，set
+        if (typeof val !== 'function') {
+            return;
+        }
+        let funcInfo = {
+            objName: "objName",
+            funcName: propName,
+        }
+        newDescriptor.value = ldvm.toolsFunc.hook(val, funcInfo, isDebug);
+    }
+    // 有的属性没有value属性，但有get和set
+    if (oldDescriptor.hasOwnProperty("get")) {
+        let get = oldDescriptor.get;
+        let funcInfo = {
+            objName: "objName",
+            funcName: `get ${propName}`, // 这里要加一个get 补完整的函数名
+        };
+        // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.name 输出的是 get cookie
+        // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.toString(); 输出的是 function get cookie() { [native code] }
+        // 因此 这里定义函数名称的时候要get  下面的set也是一样
+
+        newDescriptor.get = ldvm.toolsFunc.hook(get, funcInfo, isDebug);
+    }
+    if (oldDescriptor.hasOwnProperty("set")) {
+        let set = oldDescriptor.set;
+        let funcInfo = {
+            objName: "objName",
+            funcName: `set ${propName}`, // 这里要加一个set 补完整的函数名
+        };
+
+        newDescriptor.set = ldvm.toolsFunc.hook(set, funcInfo, isDebug);
+    }
+    // 到这里就可以真正hook这个属性了
+    Object.defineProperty(obj, propName, newDescriptor);
+
+}
+
+// 使用方法
+// ldvm.toolsFunc.hookObj(Document.prototype, "Document.prototype", "cookie");
+// document.cookie = "a=111";
+
+/**
+ * hook 原型对象的所有属性
+ * @param proto 函数原型(不是原型对象)  原型是函数名称 是类，原型对象是 (函数名.prototype)
+ * @param isDebug 是否调试
+ *
+ */
+ldvm.toolsFunc.hookProto = function hookProto(proto, isDebug) {
+    let protoObj = proto.prototype;
+    let name = proto.name;
+    let descriptors = Object.getOwnPropertyDescriptors(protoObj);
+    for (const prop in descriptors) {
+        ldvm.toolsFunc.hookObj(protoObj, `${name}.prototype`, prop, isDebug);
+    }
+    console.log(`hook ${name}.prototype`);
+}
+
 
 
 }();
