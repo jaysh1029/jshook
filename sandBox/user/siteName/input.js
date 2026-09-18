@@ -59,3 +59,8 @@ console.log(localStorage.length);
 localStorage.clear();
 console.log(localStorage.getItem("name"));
 
+let divNode = document.createElement("div");
+console.log(divNode);
+divNode.xxxx = "123";
+console.log(divNode.xxxx);
+

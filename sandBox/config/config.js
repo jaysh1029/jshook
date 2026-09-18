@@ -10,6 +10,7 @@ let ldvm = {
     envFunc: {},// 具体环境实现相关
     memory: {
         symbolProxy: Symbol("proxy"), // 标记独一无二的属性，标记是否已代理
+        ID: 0, // 自增id
     },// 内存相关
 };
 // 需要过滤的代理属性

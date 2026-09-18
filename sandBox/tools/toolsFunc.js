@@ -603,5 +603,26 @@
         console.log(`hook ${name}.prototype`);
     }
 
+    /**
+     * 获取一个自增的id，主要用户区分不同的对象
+     */
+    ldvm.toolsFunc.getId = function getId() {
+        if (ldvm.memory.ID === undefined) {
+            ldvm.memory.ID = 0;
+        }
+        ldvm.memory.ID++
+        return ldvm.memory.ID;
+    };
+    /**
+     * 创建代理原型对象 设置原型+代理
+     * @param obj 示例对象
+     * @param proto 原型
+     * @param name 对象的名字
+     */
+    ldvm.toolsFunc.createProxyObj = function createProxyObj(obj, proto, name) {
+        Object.setPrototypeOf(obj, proto.prototype);
+        // 名称加上id, 主要用户区分不同的对象
+        return ldvm.toolsFunc.proxy(obj, `${name}_ID(${ldvm.toolsFunc.getId()})`);
+    }
 
 }();

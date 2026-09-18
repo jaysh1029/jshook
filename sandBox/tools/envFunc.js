@@ -65,7 +65,19 @@
         return location;
     };
     ldvm.envFunc.Document_createElement = function () {
-        return "<div></div>";
+        let tagName = arguments[0];
+        let options = arguments[1];
+        tagName = tagName.toLowerCase(); // 标签都转换为小写
+        let tag ={};
+
+        switch (tagName) {
+            case "div":
+               tag = ldvm.toolsFunc.createProxyObj(tag, HTMLDivElement, `Document_createElement_${tagName}`);
+                break;
+                default:
+                    console.log(`Document_createElement_${tagName}未实现`);
+        }
+        return tag;
     };
 // 实现EventTarget的addEventListener方法
     ldvm.envFunc.EventTarget_addEventListener = function () {

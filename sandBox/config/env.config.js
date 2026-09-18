@@ -22,18 +22,36 @@ function getFile(fileName) {
     }
 }
 
+function getHtmlElement() {
+    try {
+        let fileList = fs.readdirSync("./env/htmlElements");
+        let code = "";
+        for (let i = 0; i < fileList.length; i++) {
+            code += fs.readFileSync(`./env/htmlElements/${fileList[i]}`) + "\r\n";
+        }
+        return code;
+
+    } catch (error) {
+        console.error(`读取./env/htmlElements目录下的文件失败`, error);
+        return "";
+    }
+}
+
 function getCode() {
     let code = "// env相关代码\r\n";
-    code += getFile("eventTarget");
-    code += getFile("windowProperties"); // 因为window继承自WindowProperties，所以要先定义WindowProperties
-    code += getFile("window");
-    code += getFile("node");
-    code += getFile("document");
-    code += getFile("htmlDocument");
-    code += getFile("storage");
-    code += getFile("navigator");
-    code += getFile("location");
-    code += getFile("globalThis"); // 全局环境放到最后
+    code += getFile("EventTarget");
+    code += getFile("WindowProperties"); // 因为window继承自WindowProperties，所以要先定义WindowProperties
+    code += getFile("Window");
+    code += getFile("Node");
+    code += getFile("Element");
+    code += getFile("HTMLElement");
+    code += getHtmlElement();
+    code += getFile("Document");
+    code += getFile("HTMLDocument");
+    code += getFile("Storage");
+    code += getFile("Navigator");
+    code += getFile("Location");
+    code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }
 
