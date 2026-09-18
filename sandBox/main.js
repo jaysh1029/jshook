@@ -69,7 +69,9 @@ try {
 
     }); // 空 sandbox
     const script = new vm.Script(codeTest, {filename: "./debugJS.js"});
-    const result = script.runInContext(context, {timeout: 1000});
+
+    // 这里timeout如果设置的时间太短，会导致整个js脚本都无法调试
+    const result = script.runInContext(context, {timeout: 10000000});
 
     console.log("执行结果:", result);
 } catch (err) {

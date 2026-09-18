@@ -210,6 +210,12 @@
     // env函数分发器
     ldvm.toolsFunc.dispatch = function dispatch(self, obj, objName, funcName, argList, defaultValue) {
         let envFuncName = `${objName}_${funcName}`; // EventTarget_addEventListener
+        // if(Object.getOwnPropertyDescriptor(obj,Symbol.toStringTag)!==undefined){
+        //     if(Object.getOwnPropertyDescriptor(self,Symbol.toStringTag)!==undefined){
+        //         // self 不是示例对象
+        //         return ldvm.toolsFunc.throwError("TypeError","Illegal invocation");
+        //     }
+        // }
         try {
             return ldvm.envFunc[envFuncName].apply(self, argList);
         } catch (error) {
@@ -221,341 +227,381 @@
     };
 
     // 获取对象类型
-ldvm.toolsFunc.getType = function getType(obj) {
-    return Object.prototype.toString.call(obj);
-}
-
-/**
- * proxy 代理器
- * @param obj 原始对象
- * @param objName 原始对象的名字
- */
-ldvm.toolsFunc.proxy = function proxy(obj, objName) {
-
-    // 若不使用代理则直接返回原始对象
-    if (!ldvm.config.proxy) {
-        return obj;
+    ldvm.toolsFunc.getType = function getType(obj) {
+        return Object.prototype.toString.call(obj);
     }
-    let handler = {
-        /**
-         *
-         * @param target 原始对象 user
-         * @param prop 属性 且只有string和symbol两种模式
-         * @param receiver 代理后的对象
-         */
-        get(target, prop, receiver) {
-            let result;
-            // target可能会报错 要用try
-            try {
-                result = Reflect.get(target, prop, receiver);
-                // 当 result 是对象时 可以用JSON.stringfy 但是这个有bug：不能输出循环引用的对象，若有循环引用，会报错
-                // 如果是对象 我们返回类型即可
-                if (result instanceof Object) { // 不能用 typeof result === "object" 因为null也是object 用instanceof 就没事
-                    let type = ldvm.toolsFunc.getType(result);
-                    console.log(`{get | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
-                    // 递归代理
-                    result = ldvm.toolsFunc.proxy(result, `${objName}.${prop.toString()}`);
-                } else if (typeof result === "symbol") {
-                    // symbol 类型的result 要进行toString 否则会报错
-                    console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], return:[${result.toString()}]}`);
-                } else {
-                    console.log(`{get | obj:[${objName}] -> prop:[${prop.toString()}], return:[${result}]}`);
-                }
 
-            } catch (e) {
-                console.log(`{get error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
-            }
-            return result;
-        }, set(target, prop, value, receiver) {
-            let result;
-            try {
-                result = Reflect.set(target, prop, value, receiver);
-                if (value instanceof Object) {
-                    let type = ldvm.toolsFunc.getType(value);
-                    console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
-                    // set 不需要递归代理，因为需要设置逻辑，这里不需要
-                } else if (typeof value === "symbol") {
-                    // symbol 类型的value 要进行toString 否则会报错
-                    console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], value:[${value.toString()}]}`);
-                } else {
-                    console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], value:[${value}]}`);
-                }
-
-            } catch (e) {
-                console.log(`{set error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
-            }
-            return result;
-        }, // 当使用Object.getOwnPropertyDescriptor方式获取属性时拦截
-        getOwnPropertyDescriptor(target, prop) {
-            let result; // 返回结果是undefined或描述符对象
-            try {
-                result = Reflect.getOwnPropertyDescriptor(target, prop);
-                let type = ldvm.toolsFunc.getType(result);
-                console.log(`{getOwnPropertyDescriptor | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
-
-                // 一般不需要拦截属性描述符，在需要的时候再拦截
-                // if (typeof result !== "undefined") { // 对象没有这个属性
-                //     result = ldvm.toolsFunc.proxy(result, `${objName}.${prop.toString()}.PropertyDescriptor`);
-                // }
-            } catch (e) {
-                console.log(`{getOwnPropertyDescriptor error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
-            }
-
-            return result;
-        }, defineProperty(target, prop, descriptor) {
-            let result;
-            try {
-                result = Reflect.defineProperty(target, prop, descriptor);
-                let type = ldvm.toolsFunc.getType(result);
-                console.log(`{defineProperty | obj:[${objName}] -> prop:[${prop.toString()}]}`);
-            } catch (e) {
-                console.log(`{defineProperty error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
-            }
-            return result;
-        }, /**
-         *
-         * @param target 函数对象
-         * @param thisArg 调用函数的this指针
-         * @param argumentsList 类数组，函数的入参组成的一个列表
-         */
-        apply(target, thisArg, argumentsList) {
-            let result;
-            try {
-                result = Reflect.apply(target, thisArg, argumentsList);
-                let type = ldvm.toolsFunc.getType(result);
-                if (result instanceof Object) {
-                    // 输出结果尽量不要输出参数，因为不知道会遇到什么奇怪的类型，导致报错，在必要的时候再输出
-                    //console.log(`{apply | function:[${objName}] -> args:[${argumentsList}], type:[${type}]}`);
-                    console.log(`{apply | function:[${objName}], type:[${type}]}`);
-                } else if (typeof result === "symbol") {
-                    // 这里若输出 argumentsList会报错，Cannot convert a Symbol value to a string
-                    // 这里result也要进行toString 否则也会报同样的错误
-                    console.log(`{apply | function:[${objName}], result:[${result.toString()}]}`);
-                } else {
-                    //console.log(`{apply | function:[${objName}] -> args:[${argumentsList}], result:[${result}]}`);
-                    console.log(`{apply | function:[${objName}], result:[${result}]}`);
-                }
-
-            } catch (e) {
-                console.log(`{apply error | function:[${objName}], error:[${e.message}]}`);
-            }
-
-            return result;
-        }, /**
-         *
-         * @param target 函数对象
-         * @param argArray 参数列表
-         * @param newTarget 代理对象
-         * @returns {*}
-         */
-        construct(target, argArray, newTarget) {
-            let result;
-            try {
-                result = Reflect.construct(target, argArray, newTarget);
-                let type = ldvm.toolsFunc.getType(result);
-                console.log(`{construct | function:[${objName}], type:[${type}]}`);
-
-            } catch (e) {
-                console.log(`{construct error | function:[${objName}], error:[${e.message}]}`);
-            }
-
-            return result;
-        }, deleteProperty: function (target, propKey) {
-            let result = Reflect.deleteProperty(target, propKey);
-            console.log(`{deleteProperty | obj:[${objName}] -> prop:[${propKey.toString()}], return:[${result}]}`);
-            return result;
-        }, has: function (target, propKey) { // 拦截 in 操作符
-            let result = Reflect.has(target, propKey);
-            console.log(`{has | obj:[${objName}] -> prop:[${propKey.toString()}], return:[${result}]}`);
-            return result;
-        },
-        ownKeys: function (target) {
-            let result = Reflect.ownKeys(target);
-            console.log(`{ownKeys | obj:[${objName}]}`);
-            return result;
-        },
-        getPrototypeOf: function (target) {
-            let result = Reflect.getPrototypeOf(target);
-            console.log(`{getPrototypeOf | obj:[${objName}]}`);
-            return result;
-        },
-        setPrototypeOf: function (target, proto) {
-            let result = Reflect.setPrototypeOf(target, proto);
-            console.log(`{setPrototypeOf | obj:[${objName}]}`);
-            return result;
-        },
-        preventExtensions: function (target) {
-            let result = Reflect.preventExtensions(target);
-            console.log(`{preventExtensions | obj:[${objName}]}`);
-            return result;
-        },
-        isExtensible: function (target) {
-            let result = Reflect.isExtensible(target);
-            console.log(`{isExtensible | obj:[${objName}]}`);
-            return result;
-        }
+    /**
+     * 过滤代理属性
+     * @param prop 属性名
+     */
+    ldvm.toolsFunc.filterProxyProp = function filterProxyProp(prop) {
+        // for(let i=0;i<ldvm.memory.filterProxyProp.length;i++){
+        //   if(ldvm.memory.filterProxyProp[i]===prop){
+        //     return true;
+        //   }
+        //   return false;
+        return ldvm.memory.filterProxyProp.includes(prop);
     };
-    return new Proxy(obj, handler);
-}
 
-/**
- *
- * @param func 原函数
- * @param funcInfo 是一个对象，objName,funcName属性
- * @param isDegug 布尔类型，是否进行调试，关键点定位，回溯调用栈
- * @param onEnter 函数，原函数执行前执行的函数，修改原函数入参，或者输出入参
- * @param onLeave 函数， 原函数执行完之后执行的函数，改原函数的返回值，或者输出原函数的返回值
- * @param isExecute 布尔类型，是否执行原函数，比如：过掉无限debugger函数
- */
-ldvm.toolsFunc.hook = function hook(func, funcInfo, isDegug, onEnter, onLeave, isExecute) {
-    // 默认参数处理
-    if (typeof func !== 'function') {
-        return func;
-    }
-    if (funcInfo === undefined) {
-        funcInfo = {};
-        funcInfo.objName = "globalThis";
-        funcInfo.funcName = func.name || "";
-    }
-    //console.log(isDegug);
-    if (isDegug === undefined) {
-        isDegug = false;
-    }
+    /**
+     * proxy 代理器
+     * @param obj 原始对象
+     * @param objName 原始对象的名字
+     */
+    ldvm.toolsFunc.proxy = function proxy(obj, objName) {
 
-    if (onEnter === undefined) {
-        onEnter = function (argObj) {
-            console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,参数是${JSON.stringify(argObj.args)}}`);
+        // 若不使用代理则直接返回原始对象
+        if (!ldvm.config.proxy) {
+            return obj;
+        }
+        // 若是已代理的对象，就不能继续创建代理
+        if (ldvm.memory.symbolProxy in obj) {
+            return obj[ldvm.memory.symbolProxy]; // 返回已代理的对象
+        }
+
+        let handler = {
+            /**
+             *
+             * @param target 原始对象 user
+             * @param prop 属性 且只有string和symbol两种模式
+             * @param receiver 代理后的对象
+             */
+            get(target, prop, receiver) {
+                let result;
+                // target可能会报错 要用try
+                try {
+                    result = Reflect.get(target, prop, receiver);
+
+                    if (ldvm.toolsFunc.filterProxyProp(prop)) {
+                        return result;
+                    }
+
+                    if (ldvm.memory.symbolProxy === prop) { // 防止递归代理
+                        return result;
+                    }
+
+                    // 当 result 是对象时 可以用JSON.stringfy 但是这个有bug：不能输出循环引用的对象，若有循环引用，会报错
+                    // 如果是对象 我们返回类型即可
+                    if (result instanceof Object) { // 不能用 typeof result === "object" 因为null也是object 用instanceof 就没事
+                        let type = ldvm.toolsFunc.getType(result);
+                        console.log(`{get | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
+                        // 递归代理
+                        result = ldvm.toolsFunc.proxy(result, `${objName}.${prop.toString()}`);
+                    } else if (typeof result === "symbol") {
+                        // symbol 类型的result 要进行toString 否则会报错
+                        console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], return:[${result.toString()}]}`);
+                    } else {
+                        console.log(`{get | obj:[${objName}] -> prop:[${prop.toString()}], return:[${result}]}`);
+                    }
+
+                } catch (e) {
+                    console.log(`{get error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
+                }
+                return result;
+            },
+            set(target, prop, value, receiver) {
+                let result;
+                try {
+                    result = Reflect.set(target, prop, value, receiver);
+                    if (value instanceof Object) {
+                        let type = ldvm.toolsFunc.getType(value);
+                        console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
+                        // set 不需要递归代理，因为需要设置逻辑，这里不需要
+                    } else if (typeof value === "symbol") {
+                        // symbol 类型的value 要进行toString 否则会报错
+                        console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], value:[${value.toString()}]}`);
+                    } else {
+                        console.log(`{set | obj:[${objName}] -> prop:[${prop.toString()}], value:[${value}]}`);
+                    }
+
+                } catch (e) {
+                    console.log(`{set error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
+                }
+                return result;
+            }, // 当使用Object.getOwnPropertyDescriptor方式获取属性时拦截
+            getOwnPropertyDescriptor(target, prop) {
+                let result; // 返回结果是undefined或描述符对象
+                try {
+                    result = Reflect.getOwnPropertyDescriptor(target, prop);
+                    let type = ldvm.toolsFunc.getType(result);
+                    console.log(`{getOwnPropertyDescriptor | obj:[${objName}] -> prop:[${prop.toString()}], type:[${type}]}`);
+
+                    // 一般不需要拦截属性描述符，在需要的时候再拦截
+                    // if (typeof result !== "undefined") { // 对象没有这个属性
+                    //     result = ldvm.toolsFunc.proxy(result, `${objName}.${prop.toString()}.PropertyDescriptor`);
+                    // }
+                } catch (e) {
+                    console.log(`{getOwnPropertyDescriptor error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
+                }
+
+                return result;
+            },
+            defineProperty(target, prop, descriptor) {
+                let result;
+                try {
+                    result = Reflect.defineProperty(target, prop, descriptor);
+                    let type = ldvm.toolsFunc.getType(result);
+                    console.log(`{defineProperty | obj:[${objName}] -> prop:[${prop.toString()}]}`);
+                } catch (e) {
+                    console.log(`{defineProperty error | obj:[${objName}] -> prop:[${prop.toString()}], error:[${e.message}]}`);
+                }
+                return result;
+            }, /**
+             *
+             * @param target 函数对象
+             * @param thisArg 调用函数的this指针
+             * @param argumentsList 类数组，函数的入参组成的一个列表
+             */
+            apply(target, thisArg, argumentsList) {
+                let result;
+                try {
+                    result = Reflect.apply(target, thisArg, argumentsList);
+                    let type = ldvm.toolsFunc.getType(result);
+                    if (result instanceof Object) {
+                        // 输出结果尽量不要输出参数，因为不知道会遇到什么奇怪的类型，导致报错，在必要的时候再输出
+                        //console.log(`{apply | function:[${objName}] -> args:[${argumentsList}], type:[${type}]}`);
+                        console.log(`{apply | function:[${objName}], type:[${type}]}`);
+                    } else if (typeof result === "symbol") {
+                        // 这里若输出 argumentsList会报错，Cannot convert a Symbol value to a string
+                        // 这里result也要进行toString 否则也会报同样的错误
+                        console.log(`{apply | function:[${objName}], result:[${result.toString()}]}`);
+                    } else {
+                        //console.log(`{apply | function:[${objName}] -> args:[${argumentsList}], result:[${result}]}`);
+                        console.log(`{apply | function:[${objName}], result:[${result}]}`);
+                    }
+
+                } catch (e) {
+                    console.log(`{apply error | function:[${objName}], error:[${e.message}]}`);
+                }
+
+                return result;
+            }, /**
+             *
+             * @param target 函数对象
+             * @param argArray 参数列表
+             * @param newTarget 代理对象
+             * @returns {*}
+             */
+            construct(target, argArray, newTarget) {
+                let result;
+                try {
+                    result = Reflect.construct(target, argArray, newTarget);
+                    let type = ldvm.toolsFunc.getType(result);
+                    console.log(`{construct | function:[${objName}], type:[${type}]}`);
+
+                } catch (e) {
+                    console.log(`{construct error | function:[${objName}], error:[${e.message}]}`);
+                }
+
+                return result;
+            }, deleteProperty: function (target, propKey) {
+                let result = Reflect.deleteProperty(target, propKey);
+                console.log(`{deleteProperty | obj:[${objName}] -> prop:[${propKey.toString()}], return:[${result}]}`);
+                return result;
+            },
+            has: function (target, propKey) { // 拦截 in 操作符
+                let result = Reflect.has(target, propKey);
+                if (propKey !== ldvm.memory.symbolProxy) {
+                    console.log(`{has | obj:[${objName}] -> prop:[${propKey.toString()}], return:[${result}]}`);
+                }
+                return result;
+            },
+            ownKeys: function (target) {
+                let result = Reflect.ownKeys(target);
+                console.log(`{ownKeys | obj:[${objName}]}`);
+                return result;
+            },
+            getPrototypeOf: function (target) {
+                let result = Reflect.getPrototypeOf(target);
+                console.log(`{getPrototypeOf | obj:[${objName}]}`);
+                return result;
+            },
+            setPrototypeOf: function (target, proto) {
+                let result = Reflect.setPrototypeOf(target, proto);
+                console.log(`{setPrototypeOf | obj:[${objName}]}`);
+                return result;
+            },
+            preventExtensions: function (target) {
+                let result = Reflect.preventExtensions(target);
+                console.log(`{preventExtensions | obj:[${objName}]}`);
+                return result;
+            },
+            isExtensible: function (target) {
+                let result = Reflect.isExtensible(target);
+                console.log(`{isExtensible | obj:[${objName}]}`);
+                return result;
+            }
         };
-    }
-    if (onLeave === undefined) {
-        onLeave = function (argObj) {
-            console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,返回值是${JSON.stringify(argObj.result)}}`);
-        };
-    }
-    if (isExecute === undefined) {
-        isExecute = true;
+        let proxyObj = new Proxy(obj, handler);
+        // 标记已代理
+        Object.defineProperty(obj, ldvm.memory.symbolProxy, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: proxyObj
+        });
+
+        return proxyObj;
     }
 
-    // 用这个函数替换原函数(原函数 = hook后的函数)
-    let hookFunc = function () {
-
-        if (isDegug) {
-            debugger;
+    /**
+     *
+     * @param func 原函数
+     * @param funcInfo 是一个对象，objName,funcName属性
+     * @param isDegug 布尔类型，是否进行调试，关键点定位，回溯调用栈
+     * @param onEnter 函数，原函数执行前执行的函数，修改原函数入参，或者输出入参
+     * @param onLeave 函数， 原函数执行完之后执行的函数，改原函数的返回值，或者输出原函数的返回值
+     * @param isExecute 布尔类型，是否执行原函数，比如：过掉无限debugger函数
+     */
+    ldvm.toolsFunc.hook = function hook(func, funcInfo, isDegug, onEnter, onLeave, isExecute) {
+        // 默认参数处理
+        if (typeof func !== 'function') {
+            return func;
         }
-        let argObj = {};
-        argObj.args = [];
-        for (let i = 0; i < arguments.length; i++) {
-            argObj.args[i] =arguments[i];
-            // argObj.args.push(arguments[i]); 这里不能用push 有数组大小上限
+        if (funcInfo === undefined) {
+            funcInfo = {};
+            funcInfo.objName = "globalThis";
+            funcInfo.funcName = func.name || "";
+        }
+        //console.log(isDegug);
+        if (isDegug === undefined) {
+            isDegug = false;
         }
 
-        // 原函数执行前
-        onEnter.call(this, argObj);
-
-        // 原函数正在执行
-        let result;
-        if (isExecute) {
-            result = func.apply(this, argObj.args);
+        if (onEnter === undefined) {
+            onEnter = function (argObj) {
+                console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,参数是${JSON.stringify(argObj.args)}}`);
+            };
+        }
+        if (onLeave === undefined) {
+            onLeave = function (argObj) {
+                console.log(`{hook|${funcInfo.objName}[${funcInfo.funcName}]正在调用,返回值是${JSON.stringify(argObj.result)}}`);
+            };
+        }
+        if (isExecute === undefined) {
+            isExecute = true;
         }
 
-        argObj.result = result;
+        // 用这个函数替换原函数(原函数 = hook后的函数)
+        let hookFunc = function () {
 
-        // 原函数执行后
-        onLeave.call(this, argObj);
+            if (isDegug) {
+                debugger;
+            }
+            let argObj = {};
+            argObj.args = [];
+            for (let i = 0; i < arguments.length; i++) {
+                argObj.args[i] = arguments[i];
+                // argObj.args.push(arguments[i]); 这里不能用push 有数组大小上限
+            }
 
-        return argObj.result;
+            // 原函数执行前
+            onEnter.call(this, argObj);
+
+            // 原函数正在执行
+            let result;
+            if (isExecute) {
+                result = func.apply(this, argObj.args);
+            }
+
+            argObj.result = result;
+
+            // 原函数执行后
+            onLeave.call(this, argObj);
+
+            return argObj.result;
+        }
+        // hook后的函数，进行native化
+        ldvm.toolsFunc.setNative(hookFunc, funcInfo.funcName);
+        ldvm.toolsFunc.reNameFunc(hookFunc, funcInfo.funcName);
+        return hookFunc;
     }
-    // hook后的函数，进行native化
-    ldvm.toolsFunc.setNative(hookFunc, funcInfo.funcName);
-    ldvm.toolsFunc.reNameFunc(hookFunc, funcInfo.funcName);
-    return hookFunc;
-}
 
 
-/**
- * hook 对象的属性，本质是替换属性描述符
- * @param obj 需要hook的对象
- * @param objName hook对象的名字
- * @param propName hook对象的属性名
- * @param isDebug 布尔 是否开启调试
- */
-ldvm.toolsFunc.hookObj = function hookObj(obj, objName, propName, isDebug) {
-    let oldDescriptor = Object.getOwnPropertyDescriptor(obj, propName);
-    let newDescriptor = {};
-    // 若原来的属性不可配置，则无法hook，直接返回
-    if (!oldDescriptor.configurable) {
-        console.log(`属性无法hook，name:${oldDescriptor.name}, configurable为false`);
-        return;
-    }
-
-    // 必须有的属性
-    newDescriptor.configurable = true;
-    newDescriptor.enumerable = oldDescriptor.enumerable;
-
-    // 原有属性若是有writable属性，就设置
-    if (oldDescriptor.hasOwnProperty("writable")) {
-        newDescriptor.writable = oldDescriptor.writable;
-    }
-    if (oldDescriptor.hasOwnProperty("value")) {
-        let val = oldDescriptor.value;
-        // 判断value属性是不是函数
-        // 若不是函数，就不需要修改或者hook 因为value是直接获取或设置了，不需要get，set
-        if (typeof val !== 'function') {
+    /**
+     * hook 对象的属性，本质是替换属性描述符
+     * @param obj 需要hook的对象
+     * @param objName hook对象的名字
+     * @param propName hook对象的属性名
+     * @param isDebug 布尔 是否开启调试
+     */
+    ldvm.toolsFunc.hookObj = function hookObj(obj, objName, propName, isDebug) {
+        let oldDescriptor = Object.getOwnPropertyDescriptor(obj, propName);
+        let newDescriptor = {};
+        // 若原来的属性不可配置，则无法hook，直接返回
+        if (!oldDescriptor.configurable) {
+            console.log(`属性无法hook，name:${oldDescriptor.name}, configurable为false`);
             return;
         }
-        let funcInfo = {
-            objName: "objName",
-            funcName: propName,
+
+        // 必须有的属性
+        newDescriptor.configurable = true;
+        newDescriptor.enumerable = oldDescriptor.enumerable;
+
+        // 原有属性若是有writable属性，就设置
+        if (oldDescriptor.hasOwnProperty("writable")) {
+            newDescriptor.writable = oldDescriptor.writable;
         }
-        newDescriptor.value = ldvm.toolsFunc.hook(val, funcInfo, isDebug);
-    }
-    // 有的属性没有value属性，但有get和set
-    if (oldDescriptor.hasOwnProperty("get")) {
-        let get = oldDescriptor.get;
-        let funcInfo = {
-            objName: "objName",
-            funcName: `get ${propName}`, // 这里要加一个get 补完整的函数名
-        };
-        // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.name 输出的是 get cookie
-        // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.toString(); 输出的是 function get cookie() { [native code] }
-        // 因此 这里定义函数名称的时候要get  下面的set也是一样
+        if (oldDescriptor.hasOwnProperty("value")) {
+            let val = oldDescriptor.value;
+            // 判断value属性是不是函数
+            // 若不是函数，就不需要修改或者hook 因为value是直接获取或设置了，不需要get，set
+            if (typeof val !== 'function') {
+                return;
+            }
+            let funcInfo = {
+                objName: "objName",
+                funcName: propName,
+            }
+            newDescriptor.value = ldvm.toolsFunc.hook(val, funcInfo, isDebug);
+        }
+        // 有的属性没有value属性，但有get和set
+        if (oldDescriptor.hasOwnProperty("get")) {
+            let get = oldDescriptor.get;
+            let funcInfo = {
+                objName: "objName",
+                funcName: `get ${propName}`, // 这里要加一个get 补完整的函数名
+            };
+            // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.name 输出的是 get cookie
+            // Object.getOwnPropertyDescriptor(Document.prototype,"cookie").get.toString(); 输出的是 function get cookie() { [native code] }
+            // 因此 这里定义函数名称的时候要get  下面的set也是一样
 
-        newDescriptor.get = ldvm.toolsFunc.hook(get, funcInfo, isDebug);
-    }
-    if (oldDescriptor.hasOwnProperty("set")) {
-        let set = oldDescriptor.set;
-        let funcInfo = {
-            objName: "objName",
-            funcName: `set ${propName}`, // 这里要加一个set 补完整的函数名
-        };
+            newDescriptor.get = ldvm.toolsFunc.hook(get, funcInfo, isDebug);
+        }
+        if (oldDescriptor.hasOwnProperty("set")) {
+            let set = oldDescriptor.set;
+            let funcInfo = {
+                objName: "objName",
+                funcName: `set ${propName}`, // 这里要加一个set 补完整的函数名
+            };
 
-        newDescriptor.set = ldvm.toolsFunc.hook(set, funcInfo, isDebug);
-    }
-    // 到这里就可以真正hook这个属性了
-    Object.defineProperty(obj, propName, newDescriptor);
+            newDescriptor.set = ldvm.toolsFunc.hook(set, funcInfo, isDebug);
+        }
+        // 到这里就可以真正hook这个属性了
+        Object.defineProperty(obj, propName, newDescriptor);
 
-}
+    }
 
 // 使用方法
 // ldvm.toolsFunc.hookObj(Document.prototype, "Document.prototype", "cookie");
 // document.cookie = "a=111";
 
-/**
- * hook 原型对象的所有属性
- * @param proto 函数原型(不是原型对象)  原型是函数名称 是类，原型对象是 (函数名.prototype)
- * @param isDebug 是否调试
- *
- */
-ldvm.toolsFunc.hookProto = function hookProto(proto, isDebug) {
-    let protoObj = proto.prototype;
-    let name = proto.name;
-    let descriptors = Object.getOwnPropertyDescriptors(protoObj);
-    for (const prop in descriptors) {
-        ldvm.toolsFunc.hookObj(protoObj, `${name}.prototype`, prop, isDebug);
+    /**
+     * hook 原型对象的所有属性
+     * @param proto 函数原型(不是原型对象)  原型是函数名称 是类，原型对象是 (函数名.prototype)
+     * @param isDebug 是否调试
+     *
+     */
+    ldvm.toolsFunc.hookProto = function hookProto(proto, isDebug) {
+        let protoObj = proto.prototype;
+        let name = proto.name;
+        let descriptors = Object.getOwnPropertyDescriptors(protoObj);
+        for (const prop in descriptors) {
+            ldvm.toolsFunc.hookObj(protoObj, `${name}.prototype`, prop, isDebug);
+        }
+        console.log(`hook ${name}.prototype`);
     }
-    console.log(`hook ${name}.prototype`);
-}
-
 
 
 }();

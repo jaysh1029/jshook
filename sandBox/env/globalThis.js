@@ -2,7 +2,10 @@
 delete global;
 delete Buffer;
 delete WindowProperties;
-let window = globalThis;
+
+delete globalThis[Symbol.toStringTag];
+
+let window = globalThis; // 这样在代理的时候 window输出的是 [object global] 所以需要提前删除gloalThis的Symbol.toStringTag
 Object.setPrototypeOf(window, Window.prototype);
 
 // 在这里定义window的对象
@@ -58,3 +61,6 @@ ldvm.toolsFunc.defineProperty(window, "name", {
 
 // location对象的属性描述符，在浏览器中的configurable为false
 Object.defineProperty(window, "location", {configurable: false});
+
+
+eval = ldvm.toolsFunc.hook(eval, undefined,false,function () {},function () {});
