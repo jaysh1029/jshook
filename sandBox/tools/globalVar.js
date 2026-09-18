@@ -8,4 +8,5 @@
         }
     };
     console.log = ldvm.toolsFunc.hook(console.log,undefined,false,onEnter,function (){},ldvm.config.print);
+    console.error = ldvm.toolsFunc.hook(console.error,undefined,false,onEnter,function (){},ldvm.config.print);
 }();

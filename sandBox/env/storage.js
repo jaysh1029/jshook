@@ -38,3 +38,8 @@ ldvm.toolsFunc.defineProperty(Storage.prototype,"setItem",{configurable:true,enu
 localStorage = {};
 Object.setPrototypeOf(localStorage, Storage.prototype);
 
+// sessionStorage对象
+let sessionStorage = {};
+Object.setPrototypeOf(sessionStorage, Storage.prototype);
+
+
