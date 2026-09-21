@@ -2,14 +2,14 @@
 
 
 !function () {
-    ldvm.envFunc.Storage_getItem = function () {
+    ldvm.envFunc.Storage_getItem = function Storage_getItem() {
         let keyName = arguments[0];
         if (keyName in this) {
             return this[keyName];
         }
         return null;
     };
-    ldvm.envFunc.Storage_setItem = function () {
+    ldvm.envFunc.Storage_setItem = function Storage_setItem() {
         let keyName = arguments[0];
         let value = arguments[1];
         /*
@@ -23,7 +23,7 @@
 
     };
 
-    ldvm.envFunc.Storage_removeItem = function () {
+    ldvm.envFunc.Storage_removeItem = function Storage_removeItem() {
 
         let keyName = arguments[0];
         delete this[keyName];
@@ -31,7 +31,7 @@
         // 通过官方文档得知 没有返回值 所以这里不需要返回值
     };
 
-    ldvm.envFunc.Storage_key = function () {
+    ldvm.envFunc.Storage_key = function Storage_key() {
 
         let index = arguments[0];
         let i = 0;
@@ -45,14 +45,14 @@
 
     };
 
-    ldvm.envFunc.Storage_clear = function () {
+    ldvm.envFunc.Storage_clear = function Storage_clear() {
 
         for (const key in this) {
             delete this[key];
         }
 
     };
-    ldvm.envFunc.Storage_length_get = function () {
+    ldvm.envFunc.Storage_length_get = function Storage_length_get() {
         let i = 0;
         for (const key in Object.getOwnPropertyDescriptors(this)) {
             i++;
@@ -61,31 +61,88 @@
 
     };
 
-    ldvm.envFunc.document_location_get = function () {
+    ldvm.envFunc.document_location_get = function document_location_get() {
         return location;
     };
-    ldvm.envFunc.Document_createElement = function () {
+    ldvm.envFunc.Document_createElement = function Document_createElement() {
         let tagName = arguments[0];
         let options = arguments[1];
         tagName = tagName.toLowerCase(); // 标签都转换为小写
-        let tag ={};
+        let tag = {};
 
         switch (tagName) {
             case "div":
-               tag = ldvm.toolsFunc.createProxyObj(tag, HTMLDivElement, `Document_createElement_${tagName}`);
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLDivElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
                 break;
-                default:
-                    console.log(`Document_createElement_${tagName}未实现`);
+            case "meta":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLMetaElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
+            case "head":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLHeadElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
+            default:
+                console.log(`Document_createElement_${tagName}未实现`);
         }
         return tag;
     };
+    ldvm.envFunc.Document_getElementsByTagName = function Document_getElementsByTagName() {
+        // 查文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementsByTagName
+        let tagName = arguments[0];
+        tagName = tagName.toLowerCase(); // 标签都转换为小写
+        let collection = [];
+        switch (tagName) {
+            case "meta":
+                // [object HTMLMetaElement]  这个类型是通过浏览器控制台获取的 Object.prototype.toString.call(meta[0])
+                collection = ldvm.toolsFunc.getCollection('[object HTMLMetaElement]');
+                // 设置原型链
+                ldvm.toolsFunc.createProxyObj(collection, HTMLCollection, `Document_getElementsByTagName_${tagName}`);
+
+                break;
+            default:
+                console.log(`Document_getElementsByTagName_${tagName}未实现`);
+                break;
+        }
+        return collection;
+
+    };
 // 实现EventTarget的addEventListener方法
-    ldvm.envFunc.EventTarget_addEventListener = function () {
+    ldvm.envFunc.EventTarget_addEventListener = function EventTarget_addEventListener() {
         console.log(this === window);
         console.log(arguments);
         //debugger;
         return "666";
     };
+
+    ldvm.envFunc.HTMLDivElement_align_get = function HTMLDivElement_align_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "align");
+    };
+    ldvm.envFunc.HTMLDivElement_align_set = function HTMLDivElement_align_set() {
+        let align = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "align", align);
+    };
+
+    ldvm.envFunc.HTMLMetaElement_content_get = function HTMLMetaElement_content_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "content");
+    };
+    ldvm.envFunc.HTMLMetaElement_content_set = function HTMLMetaElement_content_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "content", val);
+    };
+
+    ldvm.envFunc.Node_parentNode_get = function Node_parentNode_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "parentNode");
+    };
+    ldvm.envFunc.Node_removeChild = function Node_removeChild() {
+        // 从全局对象中移除这个标签即可
+        let tagObj = arguments[0];
+        // 从 ldvm.memory.tag 移除这个标签对象即可 可以在创建标签时加一个特征ID，这样方便识别
+        // TODO
+
+    };
+
 }();
 
 /*

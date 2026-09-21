@@ -61,6 +61,24 @@ console.log(localStorage.getItem("name"));
 
 let divNode = document.createElement("div");
 console.log(divNode);
-divNode.xxxx = "123";
+divNode.xxxx = "123"; // 自定义增加的属性 定义后在属性描述符中查看,是有值的
 console.log(divNode.xxxx);
+// divNode 原型对象上 有一个align属性，如果直接设置，可以成功，但是属性描述符中没有值
+divNode.align = "center";
+console.log(divNode.align);
+console.log(divNode.__proto__.align);// undefined  这个跟浏览器中表现不一致 在浏览器中报错：Uncaught TypeError: Illegal invocation
+
+// document.getElementsByTagName 实现思路
+
+function getTag(){
+    let metas = document.getElementsByTagName("meta");
+    let meta = metas[metas.length-1];
+    let val = meta.content || "YVc1cGRDQjBZV2";
+
+    meta.parentNode.removeChild(meta);
+
+    return atob(val+"NnYzNWalkyVnpjdz09");
+}
+let tagCon = getTag();
+console.log(atob(tagCon));
 

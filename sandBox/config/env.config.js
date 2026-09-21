@@ -51,6 +51,7 @@ function getCode() {
     code += getFile("Storage");
     code += getFile("Navigator");
     code += getFile("Location");
+    code += getFile("HTMLCollection");
     code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }

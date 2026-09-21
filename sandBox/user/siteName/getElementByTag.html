@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GetElementByTag</title>
+    <meta content="YVc1cGRDQjBZV2">
+    <script>
+        function getTag() {
+            let metas = document.getElementsByTagName("meta");
+            let meta = metas[metas.length - 1];
+            let val = meta.content || "YVc1cGRDQjBZV2";
+
+            meta.parentNode.removeChild(meta);
+
+            return atob(val + "NnYzNWalkyVnpjdz09");
+        }
+
+        let tagCon = getTag();
+        console.log(atob(tagCon));
+        // init tag success
+    </script>
+</head>
+<body>
+
+</body>
+</html>

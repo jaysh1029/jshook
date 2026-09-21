@@ -361,18 +361,18 @@
                     if (result instanceof Object) {
                         // 输出结果尽量不要输出参数，因为不知道会遇到什么奇怪的类型，导致报错，在必要的时候再输出
                         //console.log(`{apply | function:[${objName}] -> args:[${argumentsList}], type:[${type}]}`);
-                        console.log(`{apply | function:[${objName}], type:[${type}]}`);
+                        console.log(`{apply | function:[${objName}], arg:[${argumentsList}], type:[${type}]}`);
                     } else if (typeof result === "symbol") {
                         // 这里若输出 argumentsList会报错，Cannot convert a Symbol value to a string
                         // 这里result也要进行toString 否则也会报同样的错误
-                        console.log(`{apply | function:[${objName}], result:[${result.toString()}]}`);
+                        console.log(`{apply | function:[${objName}], arg:[${argumentsList}] result:[${result.toString()}]}`);
                     } else {
                         //console.log(`{apply | function:[${objName}] -> args:[${argumentsList}], result:[${result}]}`);
-                        console.log(`{apply | function:[${objName}], result:[${result}]}`);
+                        console.log(`{apply | function:[${objName}], arg:[${argumentsList}] result:[${result}]}`);
                     }
 
                 } catch (e) {
-                    console.log(`{apply error | function:[${objName}], error:[${e.message}]}`);
+                    console.log(`{apply error | function:[${objName}], arg:[${argumentsList}] error:[${e.message}]}`);
                 }
 
                 return result;
@@ -623,6 +623,45 @@
         Object.setPrototypeOf(obj, proto.prototype);
         // 名称加上id, 主要用户区分不同的对象
         return ldvm.toolsFunc.proxy(obj, `${name}_ID(${ldvm.toolsFunc.getId()})`);
-    }
+    };
+
+    /**
+     * 获取原型对象上自身属性值
+     * @param key 属性名
+     */
+    ldvm.toolsFunc.getProtoAtrr = function getProtoAtrr(key) {
+        // 若存在，就返回属性值
+        return this[ldvm.memory.symbolData] && this[ldvm.memory.symbolData][key];
+    };
+
+    /**
+     * 设置原型对象上自身属性值
+     * @param key 属性名
+     * @param val 属性值
+     */
+    ldvm.toolsFunc.setProtoAtrr = function setProtoAtrr(key, val) {
+
+        // 若不存在，就定义这个属性
+        if (!(ldvm.memory.symbolData in this)) {
+            Object.defineProperty(this, ldvm.memory.symbolData, {
+                enumerable: false, // 不能让外界访问遍历
+                configurable: false, // 不让外界配置属性
+                writable: true,
+                value: {}
+            });
+        }
+
+        this[ldvm.memory.symbolData][key] = val;
+    };
+    ldvm.toolsFunc.getCollection = function getCollection(tagType) {
+        let collection =[];
+        for (let i = 0; i < ldvm.memory.tag.length; i++) {
+            let tag = ldvm.memory.tag[i];
+            if (ldvm.toolsFunc.getType(tag) === tagType) {
+                collection.push(tag);
+            }
+        }
+        return collection;
+    };
 
 }();

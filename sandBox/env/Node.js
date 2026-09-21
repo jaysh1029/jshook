@@ -42,37 +42,37 @@ ldvm.toolsFunc.defineProperty(Node,"DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC",{
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"nodeType",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeType_get",arguments,9);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeType_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"nodeName",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeName_get",arguments,"#document");
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeName_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"baseURI",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","baseURI_get",arguments,"chrome-extension://aikflfpejipbpjdlfabpgclhblkpaafo/index.html");
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","baseURI_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"isConnected",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","isConnected_get",arguments,true);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","isConnected_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"ownerDocument",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","ownerDocument_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","ownerDocument_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"parentNode",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","parentNode_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","parentNode_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"parentElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","parentElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","parentElement_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"childNodes",{configurable:true,enumerable:true,get: function () {
@@ -92,17 +92,17 @@ ldvm.toolsFunc.defineProperty(Node.prototype,"lastChild",{configurable:true,enum
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"previousSibling",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","previousSibling_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","previousSibling_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"nextSibling",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nextSibling_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nextSibling_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"nodeValue",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeValue_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeValue_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","nodeValue_set",arguments);
@@ -110,7 +110,7 @@ ldvm.toolsFunc.defineProperty(Node.prototype,"nodeValue",{configurable:true,enum
 );
 ldvm.toolsFunc.defineProperty(Node.prototype,"textContent",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","textContent_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","textContent_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Node.prototype,"Node","textContent_set",arguments);
