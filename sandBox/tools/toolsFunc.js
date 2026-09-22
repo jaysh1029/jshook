@@ -654,7 +654,7 @@
         this[ldvm.memory.symbolData][key] = val;
     };
     ldvm.toolsFunc.getCollection = function getCollection(tagType) {
-        let collection =[];
+        let collection = [];
         for (let i = 0; i < ldvm.memory.tag.length; i++) {
             let tag = ldvm.memory.tag[i];
             if (ldvm.toolsFunc.getType(tag) === tagType) {
@@ -664,4 +664,24 @@
         return collection;
     };
 
+    /**
+     * 单标签解析为json对象，以后可以扩展为多标签的方式
+     * @param tagStr
+     * @returns {{type: *, prop: {}}}
+     */
+    ldvm.toolsFunc.getTagJson = function getTagJson(tagStr) {
+        let arrList = tagStr.match(/<(.*?)>/)[1].split(" ");
+        let tagJson = {
+            type: arrList[0],
+            prop: {}
+        };
+
+        for (let i = 1; i < arrList.length; i++) {
+            let item = arrList[i].split("=");
+            let key = item[0];
+            let value = item[1].replaceAll("\"", "").replaceAll("'", "");
+            tagJson.prop[key] = value;
+        }
+        return tagJson;
+    };
 }();

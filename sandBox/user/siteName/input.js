@@ -48,9 +48,9 @@ obj03 = obj02 = obj01 = new Proxy(obj01, {});
 // console.log(eval.toString());
 // console.log(window.eval.toString());
 // console.log(window.toString());
-localStorage.setItem("name","小明");
-localStorage.setItem("age","18");
-localStorage.setItem("height",160);
+localStorage.setItem("name", "小明");
+localStorage.setItem("age", "18");
+localStorage.setItem("height", 160);
 console.log(localStorage.getItem("name"));
 //localStorage.removeItem("name");
 console.log(localStorage.getItem("name"));
@@ -70,15 +70,27 @@ console.log(divNode.__proto__.align);// undefined  这个跟浏览器中表现�
 
 // document.getElementsByTagName 实现思路
 
-function getTag(){
+function getTag() {
     let metas = document.getElementsByTagName("meta");
-    let meta = metas[metas.length-1];
+    let meta = metas[metas.length - 1];
     let val = meta.content || "YVc1cGRDQjBZV2";
 
     meta.parentNode.removeChild(meta);
 
-    return atob(val+"NnYzNWalkyVnpjdz09");
+    return atob(val + "NnYzNWalkyVnpjdz09");
 }
+
 let tagCon = getTag();
 console.log(atob(tagCon));
+
+
+document.write("<input type='hidden' id='test' name='inputTag' value='666'>");
+
+function getVal() {
+    let tag = document.getElementById("test");
+    return `name:${tag.name}, value:${tag.value}`;
+}
+
+debugger;
+console.log(getVal());
 

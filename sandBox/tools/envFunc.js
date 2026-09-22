@@ -83,6 +83,10 @@
                 tag = ldvm.toolsFunc.createProxyObj(tag, HTMLHeadElement, `Document_createElement_${tagName}`);
                 ldvm.memory.tag.push(tag);
                 break;
+            case "input":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLInputElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
             default:
                 console.log(`Document_createElement_${tagName}未实现`);
         }
@@ -108,12 +112,43 @@
         return collection;
 
     };
+    ldvm.envFunc.Document_getElementById = function Document_getElementsById() {
+        // 查文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementById
+        let id = arguments[0];
+        let tagArr = ldvm.memory.tag;
+        debugger;
+        for (let i = 0; i < tagArr.length; i++) {
+            if (tagArr[i].id === id) {
+                return tagArr[i];
+            }
+        }
+        return null;
+
+    };
+
+
 // 实现EventTarget的addEventListener方法
     ldvm.envFunc.EventTarget_addEventListener = function EventTarget_addEventListener() {
         console.log(this === window);
         console.log(arguments);
         //debugger;
         return "666";
+    };
+
+    ldvm.envFunc.Document_write = function Document_write() {
+        let tagStr = arguments[0];
+        // 解析标签字符串
+
+
+        let tagJson = ldvm.toolsFunc.getTagJson(tagStr);
+        let tag = document.createElement(tagJson.type);
+        for (const key in tagJson.prop) {
+            tag[key] = tagJson.prop[key];
+            if (tag[key] === undefined) {
+                ldvm.toolsFunc.setProtoAtrr.call(tag, key, tagJson.prop[key]);
+            }
+
+        }
     };
 
     ldvm.envFunc.HTMLDivElement_align_get = function HTMLDivElement_align_get() {
@@ -141,6 +176,36 @@
         // 从 ldvm.memory.tag 移除这个标签对象即可 可以在创建标签时加一个特征ID，这样方便识别
         // TODO
 
+    };
+    ldvm.envFunc.HTMLInputElement_type_get = function HTMLInputElement_type_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "type");
+    };
+    ldvm.envFunc.HTMLInputElement_type_set = function HTMLInputElement_type_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "type", val);
+    };
+    ldvm.envFunc.Element_id_get = function Element_id_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "id");
+    };
+    ldvm.envFunc.Element_id_set = function Element_id_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "id", val);
+    };
+
+    ldvm.envFunc.HTMLInputElement_name_get = function HTMLInputElement_name_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "name");
+    };
+    ldvm.envFunc.HTMLInputElement_name_set = function HTMLInputElement_name_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "name", val);
+    };
+
+    ldvm.envFunc.HTMLInputElement_value_get = function HTMLInputElement_value_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "value");
+    };
+    ldvm.envFunc.HTMLInputElement_value_set = function HTMLInputElement_value_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "value", val);
     };
 
 }();

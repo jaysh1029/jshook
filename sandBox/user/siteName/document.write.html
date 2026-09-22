@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document.write</title>
+</head>
+<script>
+    document.write("<input type='hidden' id='test' name='inputTag' value='666'>");
+
+    function getVal() {
+        let tag = document.getElementById("test");
+        return `name:${tag.name}, value:${tag.value}`;
+    }
+
+    console.log(getVal());
+</script>
+<body>
+
+</body>
+</html>
