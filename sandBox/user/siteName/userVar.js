@@ -18,9 +18,16 @@
     let meta1 = document.createElement("meta");
     let meta2 = document.createElement("meta");
     let head = document.createElement("head");
-    meta2.content="YVc1cGRDQjBZV2";
+    meta2.content = "YVc1cGRDQjBZV2";
     // 由于Node类下面的parentNode的set方法是null，所以不能直接赋值
     // meta2.parentNode = head;
     // 通过自定义的setProtoAtrr方法设置parentNode属性
-    ldvm.toolsFunc.setProtoAtrr.call(meta2,"parentNode",head);
+    ldvm.toolsFunc.setProtoAtrr.call(meta2, "parentNode", head);
+
+    // ldvm.memory.globalVar.jsonCookie = {
+    //     name: "xm",
+    //     age: 12,
+    //     "":"abc",
+    // };
+
 }();

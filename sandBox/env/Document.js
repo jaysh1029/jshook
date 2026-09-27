@@ -1,5 +1,5 @@
 // Document对象
-let Document = function Document() {
+Document = function Document() {
 }
 ldvm.toolsFunc.safeProto(Document, "Document");
 Object.setPrototypeOf(Document.prototype, Node.prototype);
@@ -20,37 +20,37 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"implementation",{configurable:
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"URL",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","URL_get",arguments,"chrome-extension://aikflfpejipbpjdlfabpgclhblkpaafo/index.html");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","URL_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"documentURI",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","documentURI_get",arguments,"chrome-extension://aikflfpejipbpjdlfabpgclhblkpaafo/index.html");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","documentURI_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"compatMode",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","compatMode_get",arguments,"CSS1Compat");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","compatMode_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"characterSet",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","characterSet_get",arguments,"UTF-8");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","characterSet_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"charset",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","charset_get",arguments,"UTF-8");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","charset_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"inputEncoding",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","inputEncoding_get",arguments,"UTF-8");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","inputEncoding_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"contentType",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","contentType_get",arguments,"text/html");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","contentType_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"doctype",{configurable:true,enumerable:true,get: function () {
@@ -65,12 +65,12 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"documentElement",{configurable
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"xmlEncoding",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlEncoding_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlEncoding_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"xmlVersion",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlVersion_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlVersion_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlVersion_set",arguments);
@@ -78,7 +78,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"xmlVersion",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"xmlStandalone",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlStandalone_get",arguments,false);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlStandalone_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","xmlStandalone_set",arguments);
@@ -86,7 +86,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"xmlStandalone",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"domain",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","domain_get",arguments,"aikflfpejipbpjdlfabpgclhblkpaafo");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","domain_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","domain_set",arguments);
@@ -94,12 +94,12 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"domain",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"referrer",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","referrer_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","referrer_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"cookie",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","cookie_get",arguments,"Hm_lvt_b3bf29521d8cbb30bb306ad598f97731=1766368063,1766425382,1766539861,1766553943");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","cookie_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","cookie_set",arguments);
@@ -107,17 +107,17 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"cookie",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"lastModified",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","lastModified_get",arguments,"03/05/2026 07:38:30");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","lastModified_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"readyState",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","readyState_get",arguments,"complete");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","readyState_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"title",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","title_get",arguments,"WeTab 新标签页");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","title_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","title_set",arguments);
@@ -125,7 +125,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"title",{configurable:true,enum
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"dir",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","dir_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","dir_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","dir_set",arguments);
@@ -176,7 +176,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"scripts",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"currentScript",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","currentScript_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","currentScript_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"defaultView",{configurable:true,enumerable:true,get: function () {
@@ -186,7 +186,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"defaultView",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"designMode",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","designMode_get",arguments,"off");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","designMode_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","designMode_set",arguments);
@@ -194,7 +194,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"designMode",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onreadystatechange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onreadystatechange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onreadystatechange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onreadystatechange_set",arguments);
@@ -212,7 +212,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"applets",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"fgColor",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fgColor_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fgColor_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fgColor_set",arguments);
@@ -220,7 +220,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"fgColor",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"linkColor",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","linkColor_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","linkColor_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","linkColor_set",arguments);
@@ -228,7 +228,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"linkColor",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"vlinkColor",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","vlinkColor_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","vlinkColor_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","vlinkColor_set",arguments);
@@ -236,7 +236,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"vlinkColor",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"alinkColor",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","alinkColor_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","alinkColor_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","alinkColor_set",arguments);
@@ -244,7 +244,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"alinkColor",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"bgColor",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","bgColor_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","bgColor_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","bgColor_set",arguments);
@@ -262,7 +262,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"scrollingElement",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerlockchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerlockchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerlockchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerlockchange_set",arguments);
@@ -270,7 +270,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerlockchange",{configur
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerlockerror",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerlockerror_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerlockerror_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerlockerror_set",arguments);
@@ -278,22 +278,22 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerlockerror",{configura
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"hidden",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","hidden_get",arguments,true);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","hidden_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"visibilityState",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","visibilityState_get",arguments,"hidden");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","visibilityState_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"wasDiscarded",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","wasDiscarded_get",arguments,false);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","wasDiscarded_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"prerendering",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","prerendering_get",arguments,false);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","prerendering_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"featurePolicy",{configurable:true,enumerable:true,get: function () {
@@ -303,17 +303,17 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"featurePolicy",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"webkitVisibilityState",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitVisibilityState_get",arguments,"hidden");
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitVisibilityState_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"webkitHidden",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitHidden_get",arguments,true);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitHidden_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforecopy",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforecopy_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforecopy_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforecopy_set",arguments);
@@ -321,7 +321,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforecopy",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforecut",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforecut_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforecut_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforecut_set",arguments);
@@ -329,7 +329,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforecut",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforepaste",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforepaste_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforepaste_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforepaste_set",arguments);
@@ -337,7 +337,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforepaste",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onfreeze",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfreeze_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfreeze_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfreeze_set",arguments);
@@ -345,7 +345,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onfreeze",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onprerenderingchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onprerenderingchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onprerenderingchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onprerenderingchange_set",arguments);
@@ -353,7 +353,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onprerenderingchange",{configu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onresume",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onresume_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onresume_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onresume_set",arguments);
@@ -361,7 +361,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onresume",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onsearch",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsearch_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsearch_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsearch_set",arguments);
@@ -369,7 +369,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onsearch",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onvisibilitychange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onvisibilitychange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onvisibilitychange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onvisibilitychange_set",arguments);
@@ -382,7 +382,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"timeline",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"fullscreenEnabled",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreenEnabled_get",arguments,true);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreenEnabled_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreenEnabled_set",arguments);
@@ -390,7 +390,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"fullscreenEnabled",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"fullscreen",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreen_get",arguments,false);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreen_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreen_set",arguments);
@@ -398,7 +398,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"fullscreen",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onfullscreenchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfullscreenchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfullscreenchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfullscreenchange_set",arguments);
@@ -406,7 +406,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onfullscreenchange",{configura
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onfullscreenerror",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfullscreenerror_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfullscreenerror_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfullscreenerror_set",arguments);
@@ -414,27 +414,27 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onfullscreenerror",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"webkitIsFullScreen",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitIsFullScreen_get",arguments,false);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitIsFullScreen_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"webkitCurrentFullScreenElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitCurrentFullScreenElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitCurrentFullScreenElement_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"webkitFullscreenEnabled",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitFullscreenEnabled_get",arguments,true);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitFullscreenEnabled_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"webkitFullscreenElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitFullscreenElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","webkitFullscreenElement_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitfullscreenchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitfullscreenchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitfullscreenchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitfullscreenchange_set",arguments);
@@ -442,7 +442,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitfullscreenchange",{con
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitfullscreenerror",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitfullscreenerror_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitfullscreenerror_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitfullscreenerror_set",arguments);
@@ -450,17 +450,17 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitfullscreenerror",{conf
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"rootElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","rootElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","rootElement_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"pictureInPictureEnabled",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","pictureInPictureEnabled_get",arguments,true);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","pictureInPictureEnabled_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onabort",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onabort_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onabort_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onabort_set",arguments);
@@ -468,7 +468,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onabort",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforeinput",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforeinput_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforeinput_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforeinput_set",arguments);
@@ -476,7 +476,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforeinput",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforematch",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforematch_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforematch_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforematch_set",arguments);
@@ -484,7 +484,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforematch",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforetoggle",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforetoggle_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforetoggle_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforetoggle_set",arguments);
@@ -492,7 +492,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforetoggle",{configurable:
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onblur",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onblur_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onblur_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onblur_set",arguments);
@@ -500,7 +500,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onblur",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncancel",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncancel_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncancel_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncancel_set",arguments);
@@ -508,7 +508,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncancel",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncanplay",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncanplay_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncanplay_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncanplay_set",arguments);
@@ -516,7 +516,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncanplay",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncanplaythrough",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncanplaythrough_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncanplaythrough_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncanplaythrough_set",arguments);
@@ -524,7 +524,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncanplaythrough",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onchange_set",arguments);
@@ -540,7 +540,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onclick",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onclose",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onclose_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onclose_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onclose_set",arguments);
@@ -548,7 +548,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onclose",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncommand",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncommand_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncommand_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncommand_set",arguments);
@@ -556,7 +556,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncommand",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncontentvisibilityautostatechange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontentvisibilityautostatechange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontentvisibilityautostatechange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontentvisibilityautostatechange_set",arguments);
@@ -564,7 +564,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncontentvisibilityautostatech
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncontextlost",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontextlost_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontextlost_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontextlost_set",arguments);
@@ -580,7 +580,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncontextmenu",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncontextrestored",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontextrestored_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontextrestored_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncontextrestored_set",arguments);
@@ -588,7 +588,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncontextrestored",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncuechange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncuechange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncuechange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncuechange_set",arguments);
@@ -596,7 +596,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncuechange",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondblclick",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondblclick_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondblclick_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondblclick_set",arguments);
@@ -604,7 +604,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondblclick",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondrag",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondrag_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondrag_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondrag_set",arguments);
@@ -612,7 +612,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondrag",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondragend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragend_set",arguments);
@@ -620,7 +620,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondragend",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondragenter",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragenter_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragenter_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragenter_set",arguments);
@@ -628,7 +628,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondragenter",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondragleave",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragleave_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragleave_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragleave_set",arguments);
@@ -636,7 +636,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondragleave",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondragover",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragover_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragover_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragover_set",arguments);
@@ -644,7 +644,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondragover",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondragstart",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragstart_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragstart_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondragstart_set",arguments);
@@ -652,7 +652,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondragstart",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondrop",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondrop_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondrop_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondrop_set",arguments);
@@ -660,7 +660,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondrop",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ondurationchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondurationchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondurationchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ondurationchange_set",arguments);
@@ -668,7 +668,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ondurationchange",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onemptied",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onemptied_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onemptied_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onemptied_set",arguments);
@@ -676,7 +676,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onemptied",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onended",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onended_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onended_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onended_set",arguments);
@@ -684,7 +684,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onended",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onerror",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onerror_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onerror_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onerror_set",arguments);
@@ -692,7 +692,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onerror",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onfocus",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfocus_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfocus_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onfocus_set",arguments);
@@ -700,7 +700,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onfocus",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onformdata",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onformdata_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onformdata_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onformdata_set",arguments);
@@ -708,7 +708,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onformdata",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oninput",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oninput_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oninput_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oninput_set",arguments);
@@ -716,7 +716,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oninput",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oninvalid",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oninvalid_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oninvalid_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oninvalid_set",arguments);
@@ -724,7 +724,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oninvalid",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onkeydown",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeydown_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeydown_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeydown_set",arguments);
@@ -732,7 +732,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onkeydown",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onkeypress",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeypress_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeypress_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeypress_set",arguments);
@@ -740,7 +740,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onkeypress",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onkeyup",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeyup_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeyup_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onkeyup_set",arguments);
@@ -748,7 +748,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onkeyup",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onload",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onload_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onload_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onload_set",arguments);
@@ -756,7 +756,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onload",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onloadeddata",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadeddata_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadeddata_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadeddata_set",arguments);
@@ -764,7 +764,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onloadeddata",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onloadedmetadata",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadedmetadata_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadedmetadata_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadedmetadata_set",arguments);
@@ -772,7 +772,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onloadedmetadata",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onloadstart",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadstart_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadstart_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onloadstart_set",arguments);
@@ -780,7 +780,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onloadstart",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmousedown",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousedown_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousedown_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousedown_set",arguments);
@@ -788,7 +788,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmousedown",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseenter",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseenter_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseenter_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseenter_set",arguments);
@@ -796,7 +796,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseenter",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseleave",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseleave_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseleave_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseleave_set",arguments);
@@ -804,7 +804,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseleave",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmousemove",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousemove_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousemove_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousemove_set",arguments);
@@ -812,7 +812,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmousemove",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseout",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseout_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseout_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseout_set",arguments);
@@ -820,7 +820,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseout",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseover",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseover_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseover_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseover_set",arguments);
@@ -828,7 +828,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseover",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseup",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseup_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseup_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmouseup_set",arguments);
@@ -836,7 +836,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmouseup",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onmousewheel",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousewheel_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousewheel_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onmousewheel_set",arguments);
@@ -844,7 +844,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onmousewheel",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpause",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpause_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpause_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpause_set",arguments);
@@ -852,7 +852,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpause",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onplay",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onplay_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onplay_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onplay_set",arguments);
@@ -860,7 +860,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onplay",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onplaying",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onplaying_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onplaying_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onplaying_set",arguments);
@@ -868,7 +868,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onplaying",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onprogress",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onprogress_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onprogress_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onprogress_set",arguments);
@@ -876,7 +876,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onprogress",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onratechange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onratechange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onratechange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onratechange_set",arguments);
@@ -884,7 +884,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onratechange",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onreset",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onreset_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onreset_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onreset_set",arguments);
@@ -892,7 +892,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onreset",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onresize",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onresize_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onresize_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onresize_set",arguments);
@@ -900,7 +900,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onresize",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onscroll",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscroll_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscroll_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscroll_set",arguments);
@@ -908,7 +908,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onscroll",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onscrollend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollend_set",arguments);
@@ -916,7 +916,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onscrollend",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onsecuritypolicyviolation",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsecuritypolicyviolation_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsecuritypolicyviolation_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsecuritypolicyviolation_set",arguments);
@@ -924,7 +924,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onsecuritypolicyviolation",{co
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onseeked",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onseeked_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onseeked_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onseeked_set",arguments);
@@ -932,7 +932,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onseeked",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onseeking",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onseeking_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onseeking_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onseeking_set",arguments);
@@ -940,7 +940,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onseeking",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onselect",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselect_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselect_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselect_set",arguments);
@@ -948,7 +948,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onselect",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onslotchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onslotchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onslotchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onslotchange_set",arguments);
@@ -956,7 +956,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onslotchange",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onstalled",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onstalled_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onstalled_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onstalled_set",arguments);
@@ -964,7 +964,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onstalled",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onsubmit",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsubmit_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsubmit_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsubmit_set",arguments);
@@ -972,7 +972,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onsubmit",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onsuspend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsuspend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsuspend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onsuspend_set",arguments);
@@ -980,7 +980,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onsuspend",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ontimeupdate",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontimeupdate_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontimeupdate_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontimeupdate_set",arguments);
@@ -988,7 +988,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ontimeupdate",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ontoggle",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontoggle_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontoggle_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontoggle_set",arguments);
@@ -996,7 +996,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ontoggle",{configurable:true,e
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onvolumechange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onvolumechange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onvolumechange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onvolumechange_set",arguments);
@@ -1004,7 +1004,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onvolumechange",{configurable:
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwaiting",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwaiting_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwaiting_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwaiting_set",arguments);
@@ -1012,7 +1012,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwaiting",{configurable:true,
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitanimationend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationend_set",arguments);
@@ -1020,7 +1020,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitanimationend",{configu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitanimationiteration",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationiteration_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationiteration_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationiteration_set",arguments);
@@ -1028,7 +1028,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitanimationiteration",{c
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitanimationstart",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationstart_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationstart_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkitanimationstart_set",arguments);
@@ -1036,7 +1036,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkitanimationstart",{confi
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkittransitionend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkittransitionend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkittransitionend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwebkittransitionend_set",arguments);
@@ -1044,7 +1044,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwebkittransitionend",{config
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onwheel",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwheel_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwheel_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onwheel_set",arguments);
@@ -1052,7 +1052,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onwheel",{configurable:true,en
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onauxclick",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onauxclick_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onauxclick_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onauxclick_set",arguments);
@@ -1060,7 +1060,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onauxclick",{configurable:true
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ongotpointercapture",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ongotpointercapture_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ongotpointercapture_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ongotpointercapture_set",arguments);
@@ -1068,7 +1068,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ongotpointercapture",{configur
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onlostpointercapture",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onlostpointercapture_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onlostpointercapture_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onlostpointercapture_set",arguments);
@@ -1076,7 +1076,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onlostpointercapture",{configu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerdown",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerdown_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerdown_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerdown_set",arguments);
@@ -1084,7 +1084,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerdown",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointermove",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointermove_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointermove_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointermove_set",arguments);
@@ -1092,7 +1092,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointermove",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerup",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerup_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerup_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerup_set",arguments);
@@ -1100,7 +1100,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerup",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointercancel",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointercancel_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointercancel_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointercancel_set",arguments);
@@ -1108,7 +1108,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointercancel",{configurable
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerover",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerover_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerover_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerover_set",arguments);
@@ -1116,7 +1116,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerover",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerout",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerout_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerout_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerout_set",arguments);
@@ -1124,7 +1124,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerout",{configurable:tr
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerenter",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerenter_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerenter_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerenter_set",arguments);
@@ -1132,7 +1132,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerenter",{configurable:
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerleave",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerleave_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerleave_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerleave_set",arguments);
@@ -1140,7 +1140,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerleave",{configurable:
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onselectstart",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselectstart_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselectstart_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselectstart_set",arguments);
@@ -1148,7 +1148,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onselectstart",{configurable:t
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onselectionchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselectionchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselectionchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onselectionchange_set",arguments);
@@ -1156,7 +1156,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onselectionchange",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationcancel",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationcancel_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationcancel_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationcancel_set",arguments);
@@ -1164,7 +1164,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationcancel",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationend_set",arguments);
@@ -1172,7 +1172,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationend",{configurable:
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationiteration",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationiteration_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationiteration_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationiteration_set",arguments);
@@ -1180,7 +1180,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationiteration",{configu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationstart",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationstart_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationstart_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onanimationstart_set",arguments);
@@ -1188,7 +1188,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onanimationstart",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitionrun",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionrun_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionrun_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionrun_set",arguments);
@@ -1196,7 +1196,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitionrun",{configurable
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitionstart",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionstart_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionstart_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionstart_set",arguments);
@@ -1204,7 +1204,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitionstart",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitionend",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionend_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionend_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitionend_set",arguments);
@@ -1212,7 +1212,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitionend",{configurable
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitioncancel",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitioncancel_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitioncancel_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","ontransitioncancel_set",arguments);
@@ -1220,7 +1220,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"ontransitioncancel",{configura
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforexrselect",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforexrselect_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforexrselect_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onbeforexrselect_set",arguments);
@@ -1228,7 +1228,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onbeforexrselect",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncopy",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncopy_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncopy_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncopy_set",arguments);
@@ -1236,7 +1236,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncopy",{configurable:true,enu
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"oncut",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncut_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncut_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","oncut_set",arguments);
@@ -1244,7 +1244,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"oncut",{configurable:true,enum
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpaste",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpaste_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpaste_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpaste_set",arguments);
@@ -1267,7 +1267,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"lastElementChild",{configurabl
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"childElementCount",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","childElementCount_get",arguments,1);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","childElementCount_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"activeElement",{configurable:true,enumerable:true,get: function () {
@@ -1282,12 +1282,12 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"styleSheets",{configurable:tru
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"pointerLockElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","pointerLockElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","pointerLockElement_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"fullscreenElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreenElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreenElement_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","fullscreenElement_set",arguments);
@@ -1303,7 +1303,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"adoptedStyleSheets",{configura
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"pictureInPictureElement",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","pictureInPictureElement_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","pictureInPictureElement_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"customElementRegistry",{configurable:true,enumerable:true,get: function () {
@@ -1613,7 +1613,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"fragmentDirective",{configurab
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onpointerrawupdate",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerrawupdate_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerrawupdate_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onpointerrawupdate_set",arguments);
@@ -1636,12 +1636,12 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"hasRedemptionRecord",{configur
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"activeViewTransition",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","activeViewTransition_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","activeViewTransition_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onscrollsnapchange",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollsnapchange_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollsnapchange_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollsnapchange_set",arguments);
@@ -1649,7 +1649,7 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"onscrollsnapchange",{configura
 );
 ldvm.toolsFunc.defineProperty(Document.prototype,"onscrollsnapchanging",{configurable:true,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollsnapchanging_get",arguments,null);
+        return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollsnapchanging_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","onscrollsnapchanging_set",arguments);
@@ -1665,4 +1665,3 @@ ldvm.toolsFunc.defineProperty(Document.prototype,"requestStorageAccessFor",{conf
         return ldvm.toolsFunc.dispatch(this,Document.prototype,"Document","requestStorageAccessFor",arguments);
     }}
 );
-

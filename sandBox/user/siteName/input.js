@@ -94,3 +94,14 @@ function getVal() {
 debugger;
 console.log(getVal());
 
+document.cookie="aaaa";
+console.log(document.cookie);
+document.cookie="a=1";
+console.log(document.cookie);
+document.cookie="a=10";
+console.log(document.cookie);
+document.cookie="b=20";
+console.log(document.cookie);
+
+
+

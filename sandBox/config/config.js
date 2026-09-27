@@ -12,6 +12,9 @@ let ldvm = {
         symbolProxy: Symbol("proxy"), // 标记独一无二的属性，标记是否已代理
         ID: 0, // 自增id
         tag:[], // 内存，存储tag标签
+        globalVar: { // 全局变量
+            jsonCookie: {}, // cookie的json字符串
+        },
     },// 内存相关
 };
 // 需要过滤的代理属性

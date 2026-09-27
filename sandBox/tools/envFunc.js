@@ -208,6 +208,33 @@
         ldvm.toolsFunc.setProtoAtrr.call(this, "value", val);
     };
 
+    ldvm.envFunc.Document_cookie_get = function Document_cookie_get() {
+        let jsonCookie = ldvm.memory.globalVar.jsonCookie;
+        let cookieStr = "";
+        for (let key in jsonCookie) {
+            if (key === "") {
+                cookieStr += `${jsonCookie[key]}; `;
+            } else {
+                cookieStr += `${key}=${jsonCookie[key]}; `;
+            }
+        }
+        return cookieStr;
+    };
+    ldvm.envFunc.Document_cookie_set = function Document_cookie_set() {
+        let cookieVal = arguments[0];
+        let splitIndex = cookieVal.indexOf(";");
+        if (splitIndex !== -1) {
+            //document.cookie 设置值的时候，只有第一个分号前的值有效
+            cookieVal = cookieVal.substring(0, splitIndex);
+        }
+        if (cookieVal.indexOf("=" === -1)) {
+            ldvm.memory.globalVar.jsonCookie[""] = cookieVal.trim();
+        } else {
+            let cookieArr = cookieVal.split("=");
+            ldvm.memory.globalVar.jsonCookie[cookieArr[0].trim()] = cookieArr[1].trim();
+        }
+    };
+
 }();
 
 /*
