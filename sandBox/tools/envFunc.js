@@ -87,6 +87,10 @@
                 tag = ldvm.toolsFunc.createProxyObj(tag, HTMLInputElement, `Document_createElement_${tagName}`);
                 ldvm.memory.tag.push(tag);
                 break;
+            case "a":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLAnchorElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
             default:
                 console.log(`Document_createElement_${tagName}未实现`);
         }
@@ -234,7 +238,66 @@
             ldvm.memory.globalVar.jsonCookie[cookieArr[0].trim()] = cookieArr[1].trim();
         }
     };
+    ldvm.envFunc.location_protocol_get = function location_protocol_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "protocol");
+    };
+    ldvm.envFunc.location_protocol_set = function location_protocol_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "protocol", val);
+    };
 
+    ldvm.envFunc.location_hostname_get = function location_hostname_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "hostname");
+    };
+    ldvm.envFunc.location_hostname_set = function location_hostname_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "hostname", val);
+    };
+
+    ldvm.envFunc.HTMLAnchorElement_href_get = function HTMLAnchorElement_href_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "href");
+    };
+    ldvm.envFunc.HTMLAnchorElement_href_set = function HTMLAnchorElement_href_set() {
+        let val = arguments[0];
+        let url = val;
+        if (val.indexOf("http") === -1) {
+            url = location.protocol + "//" + location.hostname + val;
+        }
+
+        let urlJson = ldvm.toolsFunc.parseUrl(url);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "origin", urlJson["origin"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "protocol", urlJson["protocol"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "host", urlJson["host"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "hostname", urlJson["hostname"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "port", urlJson["port"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "pathname", urlJson["pathname"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "search", urlJson["search"]);
+        ldvm.toolsFunc.setProtoAtrr.call(this, "hash", urlJson["hash"]);
+
+        ldvm.toolsFunc.setProtoAtrr.call(this, "href", url);
+
+
+    };
+    ldvm.envFunc.HTMLAnchorElement_protocol_get = function HTMLAnchorElement_protocol_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "protocol");
+    };
+    // 这个在设置href的时候，已经设置了，所以这里不设置
+    // ldvm.envFunc.HTMLAnchorElement_protocol_set = function HTMLAnchorElement_protocol_set() {
+    //     let val = arguments[0];
+    //     ldvm.toolsFunc.setProtoAtrr.call(this, "protocol", val);
+    // };
+    ldvm.envFunc.HTMLAnchorElement_hostname_get = function HTMLAnchorElement_hostname_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "hostname");
+    };
+    ldvm.envFunc.HTMLAnchorElement_hash_get = function HTMLAnchorElement_hash_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "hash");
+    };
+    ldvm.envFunc.HTMLAnchorElement_origin_get = function HTMLAnchorElement_origin_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "origin");
+    };
+    ldvm.envFunc.HTMLAnchorElement_search_get = function HTMLAnchorElement_search_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "search");
+    };
 }();
 
 /*
