@@ -757,6 +757,7 @@
     /**
      * 创建插件
      * @param data 插件数据对象
+     * @returns {Plugin}
      */
     ldvm.toolsFunc.createPlugin = function createPlugin(data) {
 
@@ -823,6 +824,7 @@
         let index = pluginArray.length;
         pluginArray[index] = plugin;
 
+        // Object.getOwnPropertyDescriptors(navigator.plugins)
         // 通过 Object.getOwnPropertyDescriptor(navigator.plugins,"Chrome PDF Viewer")
         // 可以查看pluginArray对象的属性描述符
         Object.defineProperty(pluginArray, plugin.name, {
@@ -856,6 +858,10 @@
         return mimeType;
     };
 
+    /**
+     * 创建MimeTypeArray
+     * @returns {MimeTypeArray}
+     */
     ldvm.toolsFunc.createMimeTypeArray = function createMimeTypeArray() {
         let mimeTypeArray = {};
         mimeTypeArray = ldvm.toolsFunc.createProxyObj(mimeTypeArray, MimeTypeArray, "mimeTypeArray");
@@ -865,6 +871,11 @@
         return mimeTypeArray;
     };
 
+    /**
+     * 添加MimeType到MimeTypeArray
+     * @param mimeType
+     * @returns {MimeTypeArray}
+     */
     ldvm.toolsFunc.addMimeType = function addMimeType(mimeType) {
         let mimeTypeArray = ldvm.memory.globalVar.mimeTypeArray;
         if (mimeTypeArray === undefined) {
@@ -887,7 +898,7 @@
 
             mimeTypeArray[index] = mimeType;
 
-            // 通过 Object.getOwnPropertyDescriptor(navigator.plugins,"Chrome PDF Viewer")
+            // 通过 Object.getOwnPropertyDescriptors(navigator.mimeTypes)
             // 可以查看mimeTypeArray对象的属性描述符
             Object.defineProperty(mimeTypeArray, mimeType.type, {
                 value: mimeType,
@@ -903,6 +914,6 @@
         // 更新全局变量
         ldvm.memory.globalVar.mimeTypeArray = mimeTypeArray;
         return mimeTypeArray;
-    }
+    };
 
 }();
