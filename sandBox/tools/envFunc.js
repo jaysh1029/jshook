@@ -298,6 +298,7 @@
     ldvm.envFunc.HTMLAnchorElement_search_get = function HTMLAnchorElement_search_get() {
         return ldvm.toolsFunc.getProtoAtrr.call(this, "search");
     };
+
     ldvm.envFunc.Navigator_plugins_get = function Navigator_plugins_get() {
         return ldvm.memory.globalVar.pluginArray;
     };
