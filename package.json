@@ -12,6 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "isolated-vm": "^7.0.1",
+    "node-inspect": "^2.0.0",
     "vm2": "^3.12.2"
   }
 }

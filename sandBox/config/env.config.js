@@ -52,6 +52,11 @@ function getCode() {
     code += getFile("Navigator");
     code += getFile("Location");
     code += getFile("HTMLCollection");
+    code += getFile("Plugin");
+    code += getFile("PluginArray");
+    code += getFile("MimeType");
+    code += getFile("MimeTypeArray");
+
     code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }

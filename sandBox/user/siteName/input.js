@@ -1,6 +1,6 @@
 // 需要调试的代码
 
-debugger;
+//debugger;
 let result = window.addEventListener("load", function () {
 
 });
@@ -102,6 +102,17 @@ document.cookie="a=10";
 console.log(document.cookie);
 document.cookie="b=20";
 console.log(document.cookie);
+
+navigator.plugins
+//console.log(navigator.plugins.refresh());
+console.log(navigator.plugins.item(0));
+console.log(navigator.plugins.namedItem("PDF Viewer"));
+console.log(navigator.plugins[0].item(0));
+console.log(navigator.plugins[0].namedItem("text/pdf"));
+
+console.log(navigator.mimeTypes.item(0));
+console.log(navigator.mimeTypes.namedItem("text/pdf"));
+
 
 
 

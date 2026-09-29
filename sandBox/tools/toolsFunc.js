@@ -685,8 +685,11 @@
         return tagJson;
     };
 
-
-    // 解析url为json对象
+    /**
+     * 解析url为json对象
+     * @param url url字符串
+     * @returns {{}|string}
+     */
     ldvm.toolsFunc.parseUrl = function parseUrl(url) {
 
         const options = {
@@ -749,5 +752,157 @@
         urlJson.hash = urlJson.hash ? "#" + urlJson.hash : "";
 
         return urlJson;
+    };
+
+    /**
+     * 创建插件
+     * @param data 插件数据对象
+     */
+    ldvm.toolsFunc.createPlugin = function createPlugin(data) {
+
+        let plugin = {};
+        // 创建Plugin对象的代理对象 内部会自动设置原型链
+        plugin = ldvm.toolsFunc.createProxyObj(plugin, Plugin, "plugin");
+
+        // 接下来设置plugin属性
+        // 通过navigator.plugins[0] 可以看到对象属性和原型属性，索引属性是对象属性，其他属性是原型属性
+
+        // 像filename，name，description，mimeTypes等属性，是原型上的属性，所以要使用原型的方式
+        let mimeTypes = data.mimeTypes;
+        ldvm.toolsFunc.setProtoAtrr.call(plugin, "description", data.description);
+        ldvm.toolsFunc.setProtoAtrr.call(plugin, "filename", data.filename);
+        ldvm.toolsFunc.setProtoAtrr.call(plugin, "name", data.name);
+        ldvm.toolsFunc.setProtoAtrr.call(plugin, "length", mimeTypes.length);
+
+        for (let i = 0; i < mimeTypes.length; i++) {
+
+            let mimeType = ldvm.toolsFunc.createMimeType(mimeTypes[i], plugin);
+            // 接下来设置plugin对象本身的属性和原型属性
+
+            // 1. 数字索引是plugin对象本身的属性，直接设置即可
+            plugin[i] = mimeType;
+
+            // 2. 定义plugin的原型属性，application/pdf 和 text/pdf属性，这个属性名称就是mimeTypes[i].type
+            // 通过Object.getOwnPropertyDescriptors(navigator.plugins[0]) 可以查看plugin对象的属性描述符
+            Object.defineProperty(plugin, mimeTypes[i].type, {
+                value: mimeType,
+                writable: false,
+                enumerable: false,
+                configurable: true,
+            });
+        }
+        // 添加插件到navigator.plugins数组(PluginArray)
+        ldvm.toolsFunc.addPlugin(plugin);
+        return plugin;
+    };
+
+    /**
+     * 创建PluginArray
+     * @returns {PluginArray}
+     */
+    ldvm.toolsFunc.createPluginArray = function createPluginArray() {
+        let pluginArray = {};
+        pluginArray = ldvm.toolsFunc.createProxyObj(pluginArray, PluginArray, "pluginArray");
+        // length 是原型属性 需要使用setProtoAtrr设置
+        ldvm.toolsFunc.setProtoAtrr.call(pluginArray, "length", 0);
+
+        return pluginArray;
+    };
+
+    /**
+     * 添加插件到PluginArray
+     * @param plugin
+     * @returns {PluginArray}
+     */
+    ldvm.toolsFunc.addPlugin = function addPlugin(plugin) {
+        let pluginArray = ldvm.memory.globalVar.pluginArray;
+        if (pluginArray === undefined) {
+            pluginArray = ldvm.toolsFunc.createPluginArray();
+        }
+
+        let index = pluginArray.length;
+        pluginArray[index] = plugin;
+
+        // 通过 Object.getOwnPropertyDescriptor(navigator.plugins,"Chrome PDF Viewer")
+        // 可以查看pluginArray对象的属性描述符
+        Object.defineProperty(pluginArray, plugin.name, {
+            value: plugin,
+            writable: false,
+            enumerable: false,
+            configurable: true,
+        });
+        // 添加属性后 length要增加1
+        ldvm.toolsFunc.setProtoAtrr.call(pluginArray, "length", index + 1);
+
+        // 更新全局变量
+        ldvm.memory.globalVar.pluginArray = pluginArray;
+        return pluginArray;
+    };
+
+    /**
+     * 创建MimeType
+     * @param mimeTypeJson
+     * @param plugin
+     * @returns {MimeType}
+     */
+    ldvm.toolsFunc.createMimeType = function createMimeType(mimeTypeJson, plugin) {
+        let mimeType = {};
+        mimeType = ldvm.toolsFunc.createProxyObj(mimeType, MimeType, "mimeType");
+        ldvm.toolsFunc.setProtoAtrr.call(mimeType, "type", mimeTypeJson.type);
+        ldvm.toolsFunc.setProtoAtrr.call(mimeType, "suffixes", mimeTypeJson.suffixes);
+        ldvm.toolsFunc.setProtoAtrr.call(mimeType, "description", mimeTypeJson.description);
+        ldvm.toolsFunc.setProtoAtrr.call(mimeType, "enabledPlugin", plugin);
+        ldvm.toolsFunc.addMimeType(mimeType);
+        return mimeType;
+    };
+
+    ldvm.toolsFunc.createMimeTypeArray = function createMimeTypeArray() {
+        let mimeTypeArray = {};
+        mimeTypeArray = ldvm.toolsFunc.createProxyObj(mimeTypeArray, MimeTypeArray, "mimeTypeArray");
+        // length 是原型属性 需要使用setProtoAtrr设置
+        ldvm.toolsFunc.setProtoAtrr.call(mimeTypeArray, "length", 0);
+
+        return mimeTypeArray;
+    };
+
+    ldvm.toolsFunc.addMimeType = function addMimeType(mimeType) {
+        let mimeTypeArray = ldvm.memory.globalVar.mimeTypeArray;
+        if (mimeTypeArray === undefined) {
+            mimeTypeArray = ldvm.toolsFunc.createMimeTypeArray();
+        }
+
+        let index = mimeTypeArray.length;
+
+
+        // 由于每一个plugin对象中的索引属性中都有重复的mimeType对象，因此要判断一下是否存在重复的mimeType对象
+        let hasType = false;
+        for (let i = 0; i < mimeTypeArray.length; i++) {
+            if (mimeTypeArray[i].type === mimeType.type) {
+                hasType = true;
+                break;
+            }
+        }
+
+        if (!hasType) {
+
+            mimeTypeArray[index] = mimeType;
+
+            // 通过 Object.getOwnPropertyDescriptor(navigator.plugins,"Chrome PDF Viewer")
+            // 可以查看mimeTypeArray对象的属性描述符
+            Object.defineProperty(mimeTypeArray, mimeType.type, {
+                value: mimeType,
+                writable: false,
+                enumerable: false,
+                configurable: true,
+            });
+            // 添加属性后 length要增加1
+            ldvm.toolsFunc.setProtoAtrr.call(mimeTypeArray, "length", index + 1);
+        }
+
+
+        // 更新全局变量
+        ldvm.memory.globalVar.mimeTypeArray = mimeTypeArray;
+        return mimeTypeArray;
     }
+
 }();

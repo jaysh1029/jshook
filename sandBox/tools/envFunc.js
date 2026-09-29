@@ -120,7 +120,7 @@
         // 查文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementById
         let id = arguments[0];
         let tagArr = ldvm.memory.tag;
-        debugger;
+        //debugger;
         for (let i = 0; i < tagArr.length; i++) {
             if (tagArr[i].id === id) {
                 return tagArr[i];
@@ -298,6 +298,82 @@
     ldvm.envFunc.HTMLAnchorElement_search_get = function HTMLAnchorElement_search_get() {
         return ldvm.toolsFunc.getProtoAtrr.call(this, "search");
     };
+    ldvm.envFunc.Navigator_plugins_get = function Navigator_plugins_get() {
+        return ldvm.memory.globalVar.pluginArray;
+    };
+
+
+    ldvm.envFunc.MimeTypeArray_length_get = function MimeTypeArray_length_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "length");
+    };
+
+    ldvm.envFunc.MimeType_type_get = function MimeType_type_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "type");
+    };
+
+    ldvm.envFunc.PluginArray_length_get = function PluginArray_length_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "length");
+    };
+
+    ldvm.envFunc.Plugin_name_get = function Plugin_name_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "name");
+    };
+
+    ldvm.envFunc.Plugin_length_get = function Plugin_length_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "length");
+    };
+
+    ldvm.envFunc.Plugin_filename_get = function Plugin_filename_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "filename");
+    };
+    ldvm.envFunc.Plugin_description_get = function Plugin_description_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "description");
+    };
+    ldvm.envFunc.MimeType_enabledPlugin_get = function MimeType_enabledPlugin_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "enabledPlugin");
+    };
+    ldvm.envFunc.MimeType_suffixes_get = function MimeType_suffixes_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "suffixes");
+    };
+    ldvm.envFunc.MimeType_description_get = function MimeType_description_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "description");
+    };
+    ldvm.envFunc.Navigator_mimeTypes_get = function Navigator_mimeTypes_get() {
+        return ldvm.memory.globalVar.mimeTypeArray;
+    };
+
+    // ldvm.envFunc.PluginArray_refresh = function PluginArray_refresh() {
+    //     return;
+    // };
+
+    ldvm.envFunc.PluginArray_namedItem = function PluginArray_namedItem() {
+        let name = arguments[0];
+        return this[name];
+    };
+
+    ldvm.envFunc.PluginArray_item = function PluginArray_item() {
+        let index= arguments[0];
+        return this[index];
+    };
+    ldvm.envFunc.Plugin_namedItem = function Plugin_namedItem() {
+        let name = arguments[0];
+        return this[name];
+    };
+
+    ldvm.envFunc.Plugin_item = function Plugin_item() {
+        let index= arguments[0];
+        return this[index];
+    };
+    ldvm.envFunc.MimeTypeArray_namedItem = function MimeTypeArray_namedItem() {
+        let name = arguments[0];
+        return this[name];
+    };
+
+    ldvm.envFunc.MimeTypeArray_item = function MimeTypeArray_item() {
+        let index= arguments[0];
+        return this[index];
+    };
+
 }();
 
 /*
