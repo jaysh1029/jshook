@@ -91,6 +91,10 @@
                 tag = ldvm.toolsFunc.createProxyObj(tag, HTMLAnchorElement, `Document_createElement_${tagName}`);
                 ldvm.memory.tag.push(tag);
                 break;
+            case "canvas":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLCanvasElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
             default:
                 console.log(`Document_createElement_${tagName}未实现`);
         }
@@ -353,7 +357,7 @@
     };
 
     ldvm.envFunc.PluginArray_item = function PluginArray_item() {
-        let index= arguments[0];
+        let index = arguments[0];
         return this[index];
     };
     ldvm.envFunc.Plugin_namedItem = function Plugin_namedItem() {
@@ -362,7 +366,7 @@
     };
 
     ldvm.envFunc.Plugin_item = function Plugin_item() {
-        let index= arguments[0];
+        let index = arguments[0];
         return this[index];
     };
     ldvm.envFunc.MimeTypeArray_namedItem = function MimeTypeArray_namedItem() {
@@ -371,8 +375,91 @@
     };
 
     ldvm.envFunc.MimeTypeArray_item = function MimeTypeArray_item() {
-        let index= arguments[0];
+        let index = arguments[0];
         return this[index];
+    };
+    ldvm.envFunc.HTMLCanvasElement_width_get = function HTMLCanvasElement_width_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "width");
+    };
+    ldvm.envFunc.HTMLCanvasElement_width_set = function HTMLCanvasElement_width_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "width", val);
+    };
+    ldvm.envFunc.HTMLCanvasElement_height_get = function HTMLCanvasElement_height_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "height");
+    };
+    ldvm.envFunc.HTMLCanvasElement_height_set = function HTMLCanvasElement_height_set() {
+        let val = arguments[0];
+        ldvm.toolsFunc.setProtoAtrr.call(this, "height", val);
+    };
+    ldvm.envFunc.HTMLElement_style_get = function HTMLElement_style_get() {
+        let style = {};
+        style = ldvm.toolsFunc.createProxyObj(style, CSSStyleDeclaration, "style");
+        return style;
+    };
+
+    ldvm.envFunc.HTMLCanvasElement_getContext = function HTMLCanvasElement_getContext() {
+        let type = arguments[0];
+        let context = {};
+        switch (type) {
+            case "2d":
+                context = ldvm.toolsFunc.createProxyObj(context, CanvasRenderingContext2D, "context_2d");
+                break;
+
+            case "webgl":
+                context = ldvm.toolsFunc.createProxyObj(context, WebGLRenderingContext, "context_webgl");
+                break;
+            // 未来避免代码臃肿，没有必要补所有的环境，要根据实际报错情况添加，最终能达到目的就行
+            //  case "webgl2":
+            //      context = ldvm.toolsFunc.createProxyObj(context,WebGL2RenderingContext,"context");
+            //      break;
+            //  case "bitmaprenderer":
+            //      context = ldvm.toolsFunc.createProxyObj(context,ImageBitmapRenderingContext,"context");
+            //      break;
+            default:
+                console.log(`HTMLCanvasElement_getContext_${type}未实现`);
+                break;
+        }
+        // 为了后续调用 canvas 属性，需要设置 canvas 属性为 this 对象
+        ldvm.toolsFunc.setProtoAtrr.call(context, "canvas", this);
+        // 这里设置一个匿名属性Type，用于后续区分 context 是 2d 还是 webgl 比如调用toDataURL
+        ldvm.toolsFunc.setProtoAtrr.call(this, "type", type);
+
+        return context;
+    };
+
+    ldvm.envFunc.HTMLCanvasElement_toDataURL = function HTMLCanvasElement_toDataURL() {
+        // 在浏览器中hook HTMLCanvasElement.prototype.toDataURL 方法(需要逆向的js代码) 找到对应的返回值
+
+        // 调佣这个方法的对象类型可能是 2d 也可能是 webgl
+        let type = ldvm.toolsFunc.getProtoAtrr.call(this, "type");
+        let base64Img = "";
+        // 在UserVar.js中设置全局的值，方便以后替换
+        if (type === "2d") {
+            //base64Img = "这里是hook的base64Img";
+
+            base64Img= ldvm.memory.globalVar.canvas2d;
+        }else if (type === "webgl") {
+            //base64Img="这里是hook的base64Img_webgl";
+            base64Img= ldvm.memory.globalVar.canvasWebgl;
+        }
+        return base64Img;
+    };
+
+    ldvm.envFunc.WebGLRenderingContext_createBuffer = function WebGLRenderingContext_createBuffer() {
+        let buffer = {};
+        buffer = ldvm.toolsFunc.createProxyObj(buffer, WebGLBuffer, "buffer");
+        return buffer;
+    };
+
+    ldvm.envFunc.WebGLRenderingContext_createProgram = function WebGLRenderingContext_createProgram() {
+        let program = {};
+        program = ldvm.toolsFunc.createProxyObj(program, WebGLProgram, "program");
+        return program;
+    };
+
+    ldvm.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "canvas");
     };
 
 }();

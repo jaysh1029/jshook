@@ -56,7 +56,11 @@ function getCode() {
     code += getFile("PluginArray");
     code += getFile("MimeType");
     code += getFile("MimeTypeArray");
-
+    code += getFile("CSSStyleDeclaration");
+    code += getFile("CanvasRenderingContext2D");
+    code += getFile("WebGLRenderingContext");
+    code += getFile("WebGLBuffer");
+    code += getFile("WebGLProgram");
     code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }

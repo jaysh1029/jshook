@@ -113,6 +113,17 @@ console.log(navigator.plugins[0].namedItem("text/pdf"));
 console.log(navigator.mimeTypes.item(0));
 console.log(navigator.mimeTypes.namedItem("text/pdf"));
 
+let canvas = document.createElement("canvas");
+canvas.width = 100;
+canvas.height = 100;
+console.log(canvas.style);
+let ctx = canvas.getContext("2d");
+console.log(ctx);
+let webglCtx = canvas.getContext("webgl");
+let buffer = webglCtx.createBuffer();
+let program = webglCtx.createProgram();
+webglCtx.canvas.toDataURL("image/png");
+console.log(webglCtx);
 
 
 
