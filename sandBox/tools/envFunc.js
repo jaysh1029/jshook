@@ -95,6 +95,14 @@
                 tag = ldvm.toolsFunc.createProxyObj(tag, HTMLCanvasElement, `Document_createElement_${tagName}`);
                 ldvm.memory.tag.push(tag);
                 break;
+            case "body":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLBodyElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
+            case "span":
+                tag = ldvm.toolsFunc.createProxyObj(tag, HTMLSpanElement, `Document_createElement_${tagName}`);
+                ldvm.memory.tag.push(tag);
+                break;
             default:
                 console.log(`Document_createElement_${tagName}未实现`);
         }
@@ -183,7 +191,6 @@
         let tagObj = arguments[0];
         // 从 ldvm.memory.tag 移除这个标签对象即可 可以在创建标签时加一个特征ID，这样方便识别
         // TODO
-
     };
     ldvm.envFunc.HTMLInputElement_type_get = function HTMLInputElement_type_get() {
         return ldvm.toolsFunc.getProtoAtrr.call(this, "type");
@@ -393,8 +400,11 @@
         ldvm.toolsFunc.setProtoAtrr.call(this, "height", val);
     };
     ldvm.envFunc.HTMLElement_style_get = function HTMLElement_style_get() {
-        let style = {};
-        style = ldvm.toolsFunc.createProxyObj(style, CSSStyleDeclaration, "style");
+        let style = ldvm.toolsFunc.getProtoAtrr.call(this, "style");
+        if (style === undefined) {
+            style = ldvm.toolsFunc.createProxyObj(style, CSSStyleDeclaration, "style");
+        }
+
         return style;
     };
 
@@ -438,10 +448,10 @@
         if (type === "2d") {
             //base64Img = "这里是hook的base64Img";
 
-            base64Img= ldvm.memory.globalVar.canvas2d;
-        }else if (type === "webgl") {
+            base64Img = ldvm.memory.globalVar.canvas2d;
+        } else if (type === "webgl") {
             //base64Img="这里是hook的base64Img_webgl";
-            base64Img= ldvm.memory.globalVar.canvasWebgl;
+            base64Img = ldvm.memory.globalVar.canvasWebgl;
         }
         return base64Img;
     };
@@ -461,6 +471,73 @@
     ldvm.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
         return ldvm.toolsFunc.getProtoAtrr.call(this, "canvas");
     };
+
+
+    ldvm.envFunc.Element_innerHTML_set = function Element_innerHTML_set() {
+        let htmlStr = arguments[0];
+        // 解析标签 <span lang="zh" style="font-family: mmll;font-size: 160px;">fontTest</span>
+        // 在浏览器中模拟添加span标签后，通过dir(div.children[0])查看span属性，发现文本使用的属性是textContent
+
+        // 如果没有通用的html解析标签的方法，这里就需要判断htmlStr 是否是自己要解析的标签内容
+        let style = {
+            "font-Size": "160px",
+            "font-Family": "mmll",
+            fontFamily: "mmll",
+        };
+        style = ldvm.toolsFunc.createProxyObj(style, CSSStyleDeclaration, "style");
+        let tagJson = {
+            type: "span",
+            prop: {
+                lang: "zh",
+                style: style,
+                textContent: "fontTest"
+            }
+        };
+
+        let span = document.createElement(tagJson.type);
+        //span标签上的属性，基本都是原型上的，所以要设置到原型上
+        for (let key in tagJson.prop) {
+            ldvm.toolsFunc.setProtoAtrr.call(span, key, tagJson.prop[key]);
+        }
+        let collection = [];
+        collection.push(span);
+        collection = ldvm.toolsFunc.createProxyObj(collection, HTMLCollection, "collection");
+        ldvm.toolsFunc.setProtoAtrr.call(this, "children", collection);
+    };
+    ldvm.envFunc.Document_body_get = function Document_body_get() {
+        let collection = ldvm.toolsFunc.getCollection('[object HTMLBodyElement]');
+        return collection[0];
+    };
+    ldvm.envFunc.Node_appendChild = function Node_appendChild() {
+        let tag = arguments[0];
+        // 应该先获取children属性，再添加tag，这个children是一个HTMLCollection数组
+        // 这里先简单实现
+        let collection = [];
+        collection.push(tag);
+        collection = ldvm.toolsFunc.createProxyObj(collection, HTMLCollection, "collection");
+        ldvm.toolsFunc.setProtoAtrr.call(this, "children", collection);
+        return tag;
+    };
+    ldvm.envFunc.Element_children_get = function Element_children_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "children");
+    };
+    ldvm.envFunc.HTMLElement_offsetWidth_get = function HTMLElement_offsetWidth_get() {
+        let font = this.style.fontFamily;
+        if (ldvm.memory.globalVar.fontList.indexOf(font) !== -1) {
+            return 1666; // 能够识别的字体，返回固定宽度
+        }
+        return 1999; // 不能识别的字体，返回固定宽度
+        //return ldvm.toolsFunc.getProtoAtrr.call(this, "offsetWidth");
+    };
+    ldvm.envFunc.HTMLElement_offsetHeight_get = function HTMLElement_offsetHeight_get() {
+        let font = this.style.fontFamily;
+        if (ldvm.memory.globalVar.fontList.indexOf(font) !== -1) {
+            return 666; // 能够识别的字体，返回固定高度
+        }
+        return 999; // 不能识别的字体，返回固定高度
+        //return ldvm.toolsFunc.getProtoAtrr.call(this, "offsetWidth");
+    };
+
 
 }();
 

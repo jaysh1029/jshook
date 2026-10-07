@@ -36,4 +36,7 @@
     ldvm.memory.globalVar.canvas2d="这里是hook的base64Img";
     ldvm.memory.globalVar.canvasWebgl="这里是hook的base64Img_webgl";
 
+    let body = document.createElement("body");
+
+
 }();
