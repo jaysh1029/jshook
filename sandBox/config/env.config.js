@@ -61,6 +61,7 @@ function getCode() {
     code += getFile("WebGLRenderingContext");
     code += getFile("WebGLBuffer");
     code += getFile("WebGLProgram");
+    code += getFile("XMLHttpRequest");
     code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }

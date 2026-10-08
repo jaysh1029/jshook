@@ -537,6 +537,52 @@
         return 999; // 不能识别的字体，返回固定高度
         //return ldvm.toolsFunc.getProtoAtrr.call(this, "offsetWidth");
     };
+    ldvm.envFunc.XMLHttpRequest_open = function XMLHttpRequest_open() {
+        let method = arguments[0];
+        let url = arguments[1];
+        return url;
+    };
+
+
+    ldvm.envFunc.window_setTimeout = function window_setTimeout() {
+        let func = arguments[0];
+        let delay = arguments[1] || 0;
+        let len = arguments.length;
+        let args = [];
+        for (let i = 2; i < len; i++) {
+            args.push(arguments[i]);
+        }
+
+        let type = 1;
+        if (typeof func === "string") {
+            type = 0;
+        }
+
+        ldvm.memory.globalVar.timeoutId++;
+        let event = {
+            callback: func,
+            delay: delay,
+            args: args,
+            type: type,// 1代表func是函数， 0代表func是字符串代码，需要用eval解析为函数
+            timeoutId: ldvm.memory.globalVar.timeoutId,
+        };
+        if (ldvm.memory.asyncEvent.setTimeout === undefined) {
+            ldvm.memory.asyncEvent.setTimeout = [];
+        }
+        ldvm.memory.asyncEvent.setTimeout.push(event);
+
+        return ldvm.memory.globalVar.timeoutId;
+
+    };
+    ldvm.envFunc.window_clearTimeout = function window_clearTimeout() {
+        let timeoutId = arguments[0];
+        let timeoutEvent = ldvm.memory.asyncEvent.setTimeout;
+        for (let i = 0; i < timeoutEvent.length; i++) {
+            if (timeoutEvent[i].timeoutId === timeoutId) {
+                delete timeoutEvent[i];
+            }
+        }
+    };
 
 
 }();

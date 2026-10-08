@@ -125,26 +125,93 @@
 // webglCtx.canvas.toDataURL("image/png");
 // console.log(webglCtx);
 
+// 字体指纹
+// let fonts = [];
+// let testFont = ['SimHei', 'SimSun', 'NSimSun', 'FangSong', 'KaiTi', 'abc', 'lll', 'kkk', 'mmm', 'ttt'];
+// let divTag = document.createElement('div');
+// divTag.innerHTML = '<span lang="zh" style="font-family: mmll;font-size: 160px;">fontTest</span>';
+// document.body.appendChild(divTag);
+// let span = divTag.children[0];
+// let w = span.offsetWidth;
+// let h = span.offsetHeight;
+// for (let i = 0; i < testFont.length; i++) {
+//     span.style.fontFamily = testFont[i];
+//     let w2 = span.offsetWidth;
+//     let h2 = span.offsetHeight;
+//     if (w2 != w || h2 != h) {
+//         fonts.push(testFont[i]);
+//     }
+// }
+// let result = btoa(fonts.toString());
+// console.log(result);
+// document.body.removeChild(divTag);
 
-let fonts = [];
-let testFont = ['SimHei', 'SimSun', 'NSimSun', 'FangSong', 'KaiTi', 'abc', 'lll', 'kkk', 'mmm', 'ttt'];
-let divTag = document.createElement('div');
-divTag.innerHTML = '<span lang="zh" style="font-family: mmll;font-size: 160px;">fontTest</span>';
-document.body.appendChild(divTag);
-let span = divTag.children[0];
-let w = span.offsetWidth;
-let h = span.offsetHeight;
-for (let i = 0; i < testFont.length; i++) {
-    span.style.fontFamily = testFont[i];
-    let w2 = span.offsetWidth;
-    let h2 = span.offsetHeight;
-    if (w2 != w || h2 != h) {
-        fonts.push(testFont[i]);
-    }
+// 通过浏览器接口导出加密结果
+
+// // Hook XMLHttpRequest open
+// const originOpen = XMLHttpRequest.prototype.open;
+// XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
+//     // 简单加密参数
+//     const sign = `_sign=${btoa('mySecretKey')}`;
+//     let newUrl = url.includes('?') ? `${url}&${sign}` : `${url}?${sign}`;
+//     return originOpen.call(this, method, newUrl, async, user, password);
+// };
+//
+// // 封装简易http请求方法
+// function httpRequest(method, url, data) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open(method, url, true);
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.onload = function () {
+//         if (xhr.status >= 200 && xhr.status < 300) {
+//             console.log('响应：', JSON.parse(xhr.responseText));
+//         } else {
+//             console.error('请求失败', xhr.status);
+//         }
+//     };
+//     xhr.onerror = function () {
+//         console.error('网络错误');
+//     };
+//     if (method.toUpperCase() === 'POST') {
+//         xhr.send(JSON.stringify(data));
+//     } else {
+//         xhr.send();
+//     }
+// }
+//
+// const xhr = new XMLHttpRequest();
+// let lastUrl = xhr.open('GET', 'https://www.baidu.com/test/api');
+// console.log(lastUrl);
+// // https://www.baidu.com/test/api?_sign=bXlTZWNyZXRLZXk=
+//
+//
+// // 使用示例
+// // httpRequest('GET', 'https://example.com/api');
+// // httpRequest('POST', 'https://example.com/api', {name:'test'});
+//
+//
+// // setTimeout 实现思路
+// function setTimeoutCallback() {
+//     console.log("setTimeout回调函数正在执行");
+// }
+//
+// console.log("同步代码开始执行");
+// let timeoutId1 = setTimeout(setTimeoutCallback, 1);
+// let timeoutId2 = setTimeout("!function(){console.log('code方式');}()", 1);
+// console.log(timeoutId1);
+// console.log(timeoutId2);
+// console.log("同步代码结束执行");
+
+
+// clearTimeout 实现思路
+function setTimeoutCallback() {
+    console.log("setTimeout回调函数正在执行");
 }
-let result = btoa(fonts.toString());
-console.log(result);
-document.body.removeChild(divTag);
+console.log("同步代码开始执行");
+let timeoutId1 = setTimeout(setTimeoutCallback, 1);
+console.log(timeoutId1);
+clearTimeout(timeoutId1);
+console.log("同步代码结束执行");
 
 
 

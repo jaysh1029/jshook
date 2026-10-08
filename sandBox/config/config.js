@@ -15,7 +15,9 @@ let ldvm = {
         globalVar: { // 全局变量
             jsonCookie: {}, // cookie的json字符串
             fontList:['SimHei', 'SimSun', 'NSimSun', 'FangSong', 'KaiTi'], // 浏览器能够识别的字体列表
+            timeoutId: 0, // setTimeout的id，用来取消setTimeout
         },
+        asyncEvent: {}, // 异步事件
     },// 内存相关
 };
 // 需要过滤的代理属性
