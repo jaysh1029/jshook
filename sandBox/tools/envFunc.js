@@ -584,6 +584,55 @@
         }
     };
 
+    ldvm.envFunc.Navigator_getBattery = function Navigator_getBattery() {
+
+        // 由于在浏览器中执行getBattery方法，返回的是一个Promise对象,这个是异步方法
+        // 异步方法都是在同步代码执行后才执行，如果有多个异步方法要执行，这样就无法控制方法执行的先后顺序，因此这里应该改成同步方法，就像setTimeout一样
+        // 到时候在async.js 中执行异步代码了，按照浏览器中实际的顺序排序执行就行
+
+        // return new Promise(function (resolve, reject) {
+        //     let batteryManager = {};
+        //     batteryManager = ldvm.toolsFunc.createProxyObj(batteryManager, BatteryManager, "BatteryManager");
+        //     // 直接返回成功的信息
+        //     return resolve(batteryManager);
+        // });
+
+        // 同步改造
+        let batteryManager = {};
+        batteryManager = ldvm.toolsFunc.createProxyObj(batteryManager, BatteryManager, "BatteryManager");
+        let obj = {
+            // 原来promise中的then方法中，是一个回调函数作为参数，这里要改造成一样的，返回一个函数即可，
+
+            then: function (callBack) {
+
+                // 这里无法像浏览器一样传递battery参数，因此这里直接使用batteryManager对象，并返回一个函数，
+                // 并存储到全局变量中，等待后续异步调用
+                let _callBack = callBack;
+                callBack = function () {
+                    return _callBack(batteryManager);
+                }
+                if (ldvm.memory.asyncEvent.promise === undefined) {
+                    ldvm.memory.asyncEvent.promise = [];
+                }
+                ldvm.memory.asyncEvent.promise.push(callBack);
+                // 后面就可以在async.js 中执行异步代码了
+            },
+        };
+
+
+        return obj
+    };
+
+
+    ldvm.envFunc.BatteryManager_charging_get = function BatteryManager_charging_get() {
+        return true; // 返回浏览器中显示的结果
+    };
+    ldvm.envFunc.BatteryManager_chargingTime_get = function BatteryManager_chargingTime_get() {
+        return 0;// 返回浏览器中显示的结果
+    };
+    ldvm.envFunc.BatteryManager_level_get = function BatteryManager_level_get() {
+        return 1;// 返回浏览器中显示的结果
+    };
 
 }();
 

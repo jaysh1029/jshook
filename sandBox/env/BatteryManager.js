@@ -1,0 +1,58 @@
+// BatteryManager对象
+BatteryManager = function BatteryManager() {
+	return ldvm.toolsFunc.throwError("TypeError", "Failed to construct 'BatteryManager': Illegal constructor");
+}
+ldvm.toolsFunc.safeProto(BatteryManager, "BatteryManager");
+Object.setPrototypeOf(BatteryManager.prototype, EventTarget.prototype);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"charging",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","charging_get",arguments);
+    },set:undefined}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"chargingTime",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","chargingTime_get",arguments);
+    },set:undefined}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"dischargingTime",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","dischargingTime_get",arguments);
+    },set:undefined}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"level",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","level_get",arguments);
+    },set:undefined}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"onchargingchange",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","onchargingchange_get",arguments);
+    },set: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","onchargingchange_set",arguments);
+    }}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"onchargingtimechange",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","onchargingtimechange_get",arguments);
+    },set: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","onchargingtimechange_set",arguments);
+    }}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"ondischargingtimechange",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","ondischargingtimechange_get",arguments);
+    },set: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","ondischargingtimechange_set",arguments);
+    }}
+);
+ldvm.toolsFunc.defineProperty(BatteryManager.prototype,"onlevelchange",{configurable:true,enumerable:true,get: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","onlevelchange_get",arguments);
+    },set: function () {
+        // 分发器
+        return ldvm.toolsFunc.dispatch(this,BatteryManager.prototype,"BatteryManager","onlevelchange_set",arguments);
+    }}
+);

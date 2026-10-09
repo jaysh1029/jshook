@@ -203,14 +203,25 @@
 // console.log("同步代码结束执行");
 
 
-// clearTimeout 实现思路
-function setTimeoutCallback() {
-    console.log("setTimeout回调函数正在执行");
-}
+// // clearTimeout 实现思路
+// function setTimeoutCallback() {
+//     console.log("setTimeout回调函数正在执行");
+// }
+// console.log("同步代码开始执行");
+// let timeoutId1 = setTimeout(setTimeoutCallback, 1);
+// console.log(timeoutId1);
+// clearTimeout(timeoutId1);
+// console.log("同步代码结束执行");
+
 console.log("同步代码开始执行");
-let timeoutId1 = setTimeout(setTimeoutCallback, 1);
-console.log(timeoutId1);
-clearTimeout(timeoutId1);
+navigator.getBattery().then(battery => {
+    console.log("charging:", battery.charging);
+    console.log("chargingTime:", battery.chargingTime);
+    console.log("level:", battery.level);
+    bResult = btoa("" + battery.charging + battery.chargingTime + battery.level);
+    console.log(bResult);
+});
+
 console.log("同步代码结束执行");
 
 
