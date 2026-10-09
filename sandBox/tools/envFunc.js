@@ -145,10 +145,25 @@
 
 // 实现EventTarget的addEventListener方法
     ldvm.envFunc.EventTarget_addEventListener = function EventTarget_addEventListener() {
-        console.log(this === window);
-        console.log(arguments);
-        //debugger;
-        return "666";
+        let type = arguments[0];
+        let listener = arguments[1];
+        let options = arguments[2];
+
+        let event ={
+            self:this,
+            type,
+            listener,
+            options,
+        };
+        if(ldvm.memory.asyncEvent.listener===undefined){
+            ldvm.memory.asyncEvent.listener = {};
+        }
+        // 兼容同一个类型的多个监听器
+        if(ldvm.memory.asyncEvent.listener[type]===undefined){
+            ldvm.memory.asyncEvent.listener[type] = [];
+        }
+        ldvm.memory.asyncEvent.listener[type].push(event);
+
     };
 
     ldvm.envFunc.Document_write = function Document_write() {

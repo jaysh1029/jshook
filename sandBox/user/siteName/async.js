@@ -23,8 +23,6 @@
 })();
 
 
-
-
 (function () {
     let promiseEvent = ldvm.memory.asyncEvent.promise;
     if (promiseEvent === undefined) {
@@ -36,5 +34,25 @@
             continue;
         }
         event();
+    }
+})();
+
+(function () {
+    let listener = ldvm.memory.asyncEvent.listener;
+    if (listener === undefined) {
+        return;
+    }
+    for (let type in listener) {
+        let events = listener[type];
+        if (events === undefined) {
+            continue;
+        }
+        for (let i = 0; i < events.length; i++) {
+            let event = events[i];
+            if (event === undefined) {
+                continue;
+            }
+            event.listener.call(event.self, event.options);
+        }
     }
 })();

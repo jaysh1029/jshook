@@ -213,16 +213,31 @@
 // clearTimeout(timeoutId1);
 // console.log("同步代码结束执行");
 
+
+// // navigator.getBattery实现思路
+// console.log("同步代码开始执行");
+// navigator.getBattery().then(battery => {
+//     console.log("charging:", battery.charging);
+//     console.log("chargingTime:", battery.chargingTime);
+//     console.log("level:", battery.level);
+//     bResult = btoa("" + battery.charging + battery.chargingTime + battery.level);
+//     console.log(bResult);
+// });
+//
+// console.log("同步代码结束执行");
+
+// addEventListener实现思路
+
 console.log("同步代码开始执行");
-navigator.getBattery().then(battery => {
-    console.log("charging:", battery.charging);
-    console.log("chargingTime:", battery.chargingTime);
-    console.log("level:", battery.level);
-    bResult = btoa("" + battery.charging + battery.chargingTime + battery.level);
-    console.log(bResult);
-});
+function  loadFunc() {
+    console.log("正在执行load事件");
+}
+window.addEventListener("load", loadFunc); // 这里是异步的
 
 console.log("同步代码结束执行");
+
+
+
 
 
 
