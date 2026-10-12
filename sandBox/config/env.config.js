@@ -63,6 +63,7 @@ function getCode() {
     code += getFile("WebGLProgram");
     code += getFile("XMLHttpRequest");
     code += getFile("BatteryManager");
+    code += getFile("MouseEvent");
     code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }

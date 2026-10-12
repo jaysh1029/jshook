@@ -149,20 +149,20 @@
         let listener = arguments[1];
         let options = arguments[2];
 
-        let event ={
-            self:this,
+        let event = {
+            self: this,
             type,
             listener,
             options,
         };
-        if(ldvm.memory.asyncEvent.listener===undefined){
-            ldvm.memory.asyncEvent.listener = {};
+        if (ldvm.memory.asyncEvent.listenerList === undefined) {
+            ldvm.memory.asyncEvent.listenerList = {};
         }
         // 兼容同一个类型的多个监听器
-        if(ldvm.memory.asyncEvent.listener[type]===undefined){
-            ldvm.memory.asyncEvent.listener[type] = [];
+        if (ldvm.memory.asyncEvent.listenerList[type] === undefined) {
+            ldvm.memory.asyncEvent.listenerList[type] = [];
         }
-        ldvm.memory.asyncEvent.listener[type].push(event);
+        ldvm.memory.asyncEvent.listenerList[type].push(event);
 
     };
 
@@ -647,6 +647,16 @@
     };
     ldvm.envFunc.BatteryManager_level_get = function BatteryManager_level_get() {
         return 1;// 返回浏览器中显示的结果
+    };
+
+    ldvm.envFunc.MouseEvent_clientX_get = function MouseEvent_clientX_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "clientX");
+    };
+    ldvm.envFunc.MouseEvent_clientY_get = function MouseEvent_clientY_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "clientY");
+    };
+    ldvm.envFunc.Event_timeStamp_get = function Event_timeStamp_get() {
+        return ldvm.toolsFunc.getProtoAtrr.call(this, "timeStamp");
     };
 
 }();
