@@ -63,10 +63,13 @@ try {
     // 运行脚本
     // 如果调试的时候在这里下断点，但new VMScript(code)中要加入要调试代码的路径
     // const result = vm.run(script);
+    let ldObj = function () {
+        return {};
+    };
     const context = vm.createContext({
         fs:fs,
         _siteName_: siteName,
-
+        ldObj,
     }); // 空 sandbox
     const script = new vm.Script(codeTest, {filename: "./debugJS.js"});
 

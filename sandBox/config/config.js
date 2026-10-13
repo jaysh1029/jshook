@@ -18,6 +18,7 @@ let ldvm = {
             timeoutId: 0, // setTimeout的id，用来取消setTimeout
         },
         asyncEvent: {}, // 异步事件
+        //all:new ldObj(), // document.all 对象 这里的ldObj需要特殊定制的node环境
     },// 内存相关
 };
 // 需要过滤的代理属性

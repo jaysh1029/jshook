@@ -658,6 +658,14 @@
     ldvm.envFunc.Event_timeStamp_get = function Event_timeStamp_get() {
         return ldvm.toolsFunc.getProtoAtrr.call(this, "timeStamp");
     };
+    ldvm.envFunc.Document_all_get = function Document_all_get() {
+        let all = ldvm.memory.globalVar.all || {};
+        // 这个不能代理，否则后面的undefined就会失效，就用原始的设置原型方法
+        // 也就是不能使用all = ldvm.toolsFunc.createProxyObj(all, HTMLAllCollection.prototype, "all")来代理
+        Object.setPrototypeOf(all, HTMLAllCollection.prototype);
+        return all;
+
+    };
 
 }();
 

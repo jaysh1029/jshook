@@ -4,7 +4,7 @@ delete Buffer;
 delete WindowProperties;
 
 delete globalThis[Symbol.toStringTag];
-
+//delete ldObj;
 let window = globalThis; // 这样在代理的时候 window输出的是 [object global] 所以需要提前删除gloalThis的Symbol.toStringTag
 Object.setPrototypeOf(window, Window.prototype);
 
