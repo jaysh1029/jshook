@@ -52,6 +52,19 @@ function getCode() {
     code += getFile("Navigator");
     code += getFile("Location");
     code += getFile("HTMLCollection");
+    code += getFile("Plugin");
+    code += getFile("PluginArray");
+    code += getFile("MimeType");
+    code += getFile("MimeTypeArray");
+    code += getFile("CSSStyleDeclaration");
+    code += getFile("CanvasRenderingContext2D");
+    code += getFile("WebGLRenderingContext");
+    code += getFile("WebGLBuffer");
+    code += getFile("WebGLProgram");
+    code += getFile("XMLHttpRequest");
+    code += getFile("BatteryManager");
+    code += getFile("MouseEvent");
+    code += getFile("HTMLAllCollection");
     code += getFile("GlobalThis"); // 全局环境放到最后
     return code;
 }

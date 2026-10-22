@@ -4,7 +4,6 @@ Location = function Location() {
 }
 ldvm.toolsFunc.safeProto(Location, "Location");
 
-
 // location对象
 let location = {};
 Object.setPrototypeOf(location, Location.prototype);
@@ -20,7 +19,7 @@ ldvm.toolsFunc.defineProperty(location,"ancestorOrigins",{configurable:false,enu
 );
 ldvm.toolsFunc.defineProperty(location,"href",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","href_get",arguments,"chrome-extension://aikflfpejipbpjdlfabpgclhblkpaafo/index.html");
+        return ldvm.toolsFunc.dispatch(this,location,"location","href_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","href_set",arguments);
@@ -28,12 +27,12 @@ ldvm.toolsFunc.defineProperty(location,"href",{configurable:false,enumerable:tru
 );
 ldvm.toolsFunc.defineProperty(location,"origin",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","origin_get",arguments,"chrome-extension://aikflfpejipbpjdlfabpgclhblkpaafo");
+        return ldvm.toolsFunc.dispatch(this,location,"location","origin_get",arguments);
     },set:undefined}
 );
 ldvm.toolsFunc.defineProperty(location,"protocol",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","protocol_get",arguments,"chrome-extension:");
+        return ldvm.toolsFunc.dispatch(this,location,"location","protocol_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","protocol_set",arguments);
@@ -41,7 +40,7 @@ ldvm.toolsFunc.defineProperty(location,"protocol",{configurable:false,enumerable
 );
 ldvm.toolsFunc.defineProperty(location,"host",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","host_get",arguments,"aikflfpejipbpjdlfabpgclhblkpaafo");
+        return ldvm.toolsFunc.dispatch(this,location,"location","host_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","host_set",arguments);
@@ -49,7 +48,7 @@ ldvm.toolsFunc.defineProperty(location,"host",{configurable:false,enumerable:tru
 );
 ldvm.toolsFunc.defineProperty(location,"hostname",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","hostname_get",arguments,"aikflfpejipbpjdlfabpgclhblkpaafo");
+        return ldvm.toolsFunc.dispatch(this,location,"location","hostname_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","hostname_set",arguments);
@@ -57,7 +56,7 @@ ldvm.toolsFunc.defineProperty(location,"hostname",{configurable:false,enumerable
 );
 ldvm.toolsFunc.defineProperty(location,"port",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","port_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,location,"location","port_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","port_set",arguments);
@@ -65,7 +64,7 @@ ldvm.toolsFunc.defineProperty(location,"port",{configurable:false,enumerable:tru
 );
 ldvm.toolsFunc.defineProperty(location,"pathname",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","pathname_get",arguments,"/index.html");
+        return ldvm.toolsFunc.dispatch(this,location,"location","pathname_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","pathname_set",arguments);
@@ -73,7 +72,7 @@ ldvm.toolsFunc.defineProperty(location,"pathname",{configurable:false,enumerable
 );
 ldvm.toolsFunc.defineProperty(location,"search",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","search_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,location,"location","search_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","search_set",arguments);
@@ -81,7 +80,7 @@ ldvm.toolsFunc.defineProperty(location,"search",{configurable:false,enumerable:t
 );
 ldvm.toolsFunc.defineProperty(location,"hash",{configurable:false,enumerable:true,get: function () {
         // 分发器
-        return ldvm.toolsFunc.dispatch(this,location,"location","hash_get",arguments,"");
+        return ldvm.toolsFunc.dispatch(this,location,"location","hash_get",arguments);
     },set: function () {
         // 分发器
         return ldvm.toolsFunc.dispatch(this,location,"location","hash_set",arguments);
